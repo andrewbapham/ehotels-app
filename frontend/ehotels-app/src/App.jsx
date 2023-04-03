@@ -1,20 +1,12 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import CustomerView from './components/CustomerView'
-import EmployeeView from './components/EmployeeView'
-import './App.css'
+import { useEffect, useState } from "react";
+import reactLogo from "./assets/react.svg";
+import viteLogo from "/vite.svg";
+import CustomerView from "./components/CustomerView";
+import EmployeeView from "./components/EmployeeView";
+import "./App.css";
 
 function App() {
-  const [role, setRole] = useState('customer')
-  handleRoleChange = () => {
-    if (role==='customer') {
-      setRole('employee')
-    } else {
-      setRole('customer')
-    }
-
-  }
+  const [role, setRole] = useState("customer");
 
   return (
     <div className="App">
@@ -25,7 +17,8 @@ function App() {
           id="customer-role"
           name="user-role"
           value="customer"
-          checked
+          onClick={() => setRole("customer")}
+          defaultChecked
         />
         <label for="customer-role">Customer</label>
         <input
@@ -33,13 +26,13 @@ function App() {
           id="employee-role"
           name="user-role"
           value="employee"
-          onclick="handleRoleChange()"
+          onClick={() => setRole("employee")}
         />
         <label for="employee-role">Employee</label>
       </div>
-      {role === 'customer' ? <CustomerView/> : <EmployeeView/>}
+      {role === "customer" ? <CustomerView /> : <EmployeeView />}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
