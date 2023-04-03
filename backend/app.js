@@ -11,6 +11,16 @@ const db = mysql.createConnection({
   password: "csi2132",
   database: "ehotels_db",
 });
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 db.connect((err) => {
   if (err) {
     console.log(err);
@@ -20,20 +30,22 @@ db.connect((err) => {
 });
 
 app.get("/", (req, res) => {
-  console.log(req);
+  //console.log(req);
   res.send("Hello World!");
 });
 
-app.get("/api/employees", (req, res) => {
-  console.log(req);
+app.get("/api/employee", (req, res) => {
+  //console.log(req);
   db.query("SELECT * FROM " + req.query.table, (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      console.log(result);
+      res.send(result);
+      //console.log(result);
     }
   });
 });
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
