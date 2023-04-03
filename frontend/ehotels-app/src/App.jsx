@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div className="App">
-      <div class="role-selector">
+      <div className="role-selector">
         <h3>Select a role:</h3>
         <input
           type="radio"
@@ -20,7 +20,7 @@ function App() {
           onClick={() => setRole("customer")}
           defaultChecked
         />
-        <label for="customer-role">Customer</label>
+        <label htmlFor="customer-role">Customer</label>
         <input
           type="radio"
           id="employee-role"
@@ -28,7 +28,7 @@ function App() {
           value="employee"
           onClick={() => setRole("employee")}
         />
-        <label for="employee-role">Employee</label>
+        <label htmlFor="employee-role">Employee</label>
       </div>
       {role === "customer" ? <CustomerView /> : <EmployeeView />}
     </div>
