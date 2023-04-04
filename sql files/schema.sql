@@ -1,3 +1,5 @@
+CREATE DATABASE ehotels_db;
+USE ehotels_db;
 CREATE TABLE Hotel_Chain (
     Chain_id INT PRIMARY KEY,
     Central_office_address VARCHAR(255) NOT NULL,
