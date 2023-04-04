@@ -16,10 +16,13 @@ To install all necessary node modules. Then, run
 To start and preview the front-end application. The application will update as you edit and save the files in the project.
 To stop the application, enter `CTRL+C` in the terminal window.
 
-### Backend
+### Database
 #### IMPORTANT: In order for the backend to work as is, without changing user and password configurations, you will need to create a MySQL user that has access to the database with credentials:
 User: ehotels_access
 Password: csi2132
+Open MySQL workbench and execute the `schema.sql` script first, followed by the `dataForHotels.sql` script.
+
+### Backend
 
 Once you've created the user, in another terminal window, navigate to the `/backend` directoy. Then run 
 `npm run i`
@@ -30,5 +33,6 @@ To quit the server, enter `CTRL+C` in the terminal window.
 
 Optional: 
 Run `npm i -g nodemon` to install Nodemon, an extension that allows for auto updating node apps as you change them. If not, you will need to stop and restart your node terminal everytime you make changes to see the effects.
+
 
 
