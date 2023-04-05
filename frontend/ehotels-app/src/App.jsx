@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState } from "react";
 import CustomerView from "./components/CustomerView";
 import EmployeeView from "./components/EmployeeView";
 import "./App.css";

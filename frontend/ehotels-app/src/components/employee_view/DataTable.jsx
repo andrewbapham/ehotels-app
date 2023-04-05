@@ -2,6 +2,7 @@ import React from "react";
 
 function DataTable(props) {
   if (props.data.length === 0) return <div></div>;
+  if (typeof props.data === "string") return <div>{props.data}</div>;
   const headers = [];
   //Extract the table headers using the first row of data
   Object.keys(props.data[0]).forEach((item) =>
