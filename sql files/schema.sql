@@ -1,3 +1,5 @@
+CREATE DATABASE ehotels_db;
+USE ehotels_db;
 CREATE TABLE Hotel_Chain (
     Chain_id INT PRIMARY KEY,
     Central_office_address VARCHAR(255) NOT NULL,
@@ -55,8 +57,8 @@ CREATE TABLE Booking (
     End_date DATE NOT NULL,
     Price DECIMAL(10,2),
     Room_id INT NOT NULL,
-    FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE CASCADE,
-    FOREIGN KEY (Room_id) REFERENCES Room(Room_id) ON DELETE CASCADE
+    FOREIGN KEY (Customer_id) REFERENCES Customer(Customer_id) ON DELETE SET NULL,
+    FOREIGN KEY (Room_id) REFERENCES Room(Room_id) ON DELETE SET NULL
 );
 
 CREATE TABLE Renting (
@@ -64,5 +66,5 @@ CREATE TABLE Renting (
     Booking_id INT NOT NULL,
     Start_date DATE NOT NULL,
     End_date DATE NOT NULL,
-    FOREIGN KEY (Booking_id) REFERENCES Booking(Booking_id) ON DELETE CASCADE
+    FOREIGN KEY (Booking_id) REFERENCES Booking(Booking_id) ON DELETE SET NULL
 );
