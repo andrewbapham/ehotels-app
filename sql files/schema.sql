@@ -40,7 +40,7 @@ CREATE TABLE Customer (
     Registration_date DATE NOT NULL
 );
 
-CREATE TABLE Employees (
+CREATE TABLE Employee (
     Employee_id INT PRIMARY KEY,
     Employee_Name VARCHAR(255) NOT NULL,
     Address VARCHAR(255),
