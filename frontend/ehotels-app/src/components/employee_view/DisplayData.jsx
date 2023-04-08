@@ -28,7 +28,7 @@ function DisplayData(props) {
         onChange={(e) => setTable(e.target.value)}
       >
         <option value="customer">Customer</option>
-        <option value="employees">Employees</option>
+        <option value="employee">Employees</option>
         <option value="hotel">Hotel</option>
         <option value="room">Room</option>
       </select>
