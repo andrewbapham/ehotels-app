@@ -6,7 +6,8 @@ CREATE TABLE Hotel_Chain (
     Central_office_city VARCHAR(255) NOT NULL,
     Number_of_hotels INT NOT NULL,
     Email_addresses VARCHAR(255),
-    Phone_numbers VARCHAR(255)
+    Phone_numbers VARCHAR(255),
+    Chain_name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE Hotel (
@@ -17,6 +18,7 @@ CREATE TABLE Hotel (
     City VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL,
     Phone_numbers VARCHAR(255),
+    Hotel_name VARCHAR(255) NOT NULL,
     Manager_id INT,
     Chain_id INT,
     FOREIGN KEY (Chain_id) REFERENCES Hotel_Chain(Chain_id) ON DELETE CASCADE
