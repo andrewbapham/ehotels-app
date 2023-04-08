@@ -53,7 +53,12 @@ app.get("/api/employee/headers", (req, res) => {
     if (err) {
       console.log(err);
     } else {
-      const headers = result.map((col) => col.Field);
+      const headers = result.map((col) => {
+        let obj = {};
+        obj[col.Field] = col.Type;
+        return obj;
+      });
+      console.log(headers);
       res.send(headers);
     }
   });
