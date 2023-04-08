@@ -32,7 +32,7 @@ function DisplayData(props) {
         <option value="hotel">Hotel</option>
         <option value="room">Room</option>
       </select>
-      {data.length === 0 ? "" : <DataTable data={data} />}
+      {data.length === 0 ? "Table is empty." : <DataTable data={data} />}
     </>
   );
 }

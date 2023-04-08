@@ -64,6 +64,67 @@ app.get("/api/employee/headers", (req, res) => {
   });
 });
 
+app.get("/api/customers/findroom", (req, res) => {
+  //Generate query based on search parameters
+  let roomQuery = "SELECT Room.* FROM Room, Hotel, Booking WHERE ";
+  let queryStatements = [];
+  for (let key in qs.parse(req.query)) {
+    //Skip bad parameters
+    if (!(key in searchQueries)) {
+      continue;
+    } else if (req.query[key] !== "") {
+      queryStatements.push(generateClause(key, req.query[key]));
+    }
+  }
+
+  //Add all the where parts of the query together
+  for (let i = 0; i < queryStatements.length; i++) {
+    if (i === 0) {
+      roomQuery += queryStatements[i];
+    } else {
+      roomQuery += " AND " + queryStatements[i];
+    }
+  }
+  roomQuery += " AND Room.hotel_id = Hotel.hotel_id";
+
+  let chainInfoQuery =
+    "SELECT availRooms.*, Hotel.hotel_name, Hotel.address, Hotel.city, Hotel.stars, Hotel_chain.Chain_name FROM (" +
+    roomQuery +
+    ") availRooms, Hotel, Hotel_chain WHERE availRooms.hotel_id = Hotel.hotel_id AND Hotel.chain_id = Hotel_chain.chain_id";
+  db.query(chainInfoQuery, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+let searchQueries = {
+  capacity: "Room.capacity = ",
+  city: "Hotel.city LIKE ",
+  priceEquals: "Room.price = ",
+  priceLessThan: "Room.price <= ",
+  priceGreaterThan: "Room.price >= ",
+  stars: "Hotel.stars = ",
+  chain: "Hotel.chain_id = ",
+  amenities: "Rooms.amenities LIKE ",
+  dateRange: "Booking.startDate <= ",
+};
+
+function generateClause(param, value) {
+  let clause = searchQueries[param] + value;
+  if (typeof value === "object" && param === "dateRange") {
+    clause =
+      "Room.room_id NOT IN (SELECT r.room_id FROM occupiedrooms r WHERE r.start_date <= '" +
+      value.endDate +
+      "' AND r.end_date >= '" +
+      value.startDate +
+      "')";
+  }
+  return clause;
+}
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
