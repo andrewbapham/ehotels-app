@@ -28,7 +28,7 @@ function DataTable(props) {
       <thead>
         <tr>{headers}</tr>
       </thead>
-      {tableRows}
+      <tbody>{tableRows}</tbody>
     </table>
   );
 }

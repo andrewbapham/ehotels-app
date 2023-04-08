@@ -1,17 +1,18 @@
 import { useState, useEffect, React } from "react";
 import axios from "axios";
-import ModifyForm from "./ModifyForm";
+import CreateDataForm from "./CreateDataForm";
 
-function ModifyData(props) {
+function CreateData(props) {
   const baseURL = "http://localhost:3000";
   const [table, setTable] = useState("customer");
-  const [fields, setFields] = useState([]);
+  const [headers, setHeaders] = useState([]);
+  const [inputVals, setInputVals] = useState({});
 
   useEffect(() => {
     axios
       .get(baseURL + "/api/employee/headers?table=" + table)
       .then((res) => {
-        console.log(res.data);
+        setHeaders(res.data);
       })
       .catch((err) => {
         //console.log(err);
@@ -23,15 +24,19 @@ function ModifyData(props) {
     Dropdown menu to select table to modify
   */}
       <label htmlFor="table-name">Table:</label>
-      <select name="table-select" id="table-select">
+      <select
+        name="table-select"
+        id="table-select"
+        onChange={(e) => setTable(e.target.value)}
+      >
         <option value="customer">Customer</option>
         <option value="employees">Employees</option>
         <option value="hotel">Hotel</option>
         <option value="room">Room</option>
       </select>
-      <ModifyForm table={table} />
+      <CreateDataForm headers={headers} setInputVals={setInputVals} />
     </>
   );
 }
 
-export default ModifyData;
+export default CreateData;
