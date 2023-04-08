@@ -3,6 +3,7 @@ USE ehotels_db;
 CREATE TABLE Hotel_Chain (
     Chain_id INT PRIMARY KEY AUTO_INCREMENT,
     Central_office_address VARCHAR(255) NOT NULL,
+    Central_office_city VARCHAR(255) NOT NULL,
     Number_of_hotels INT NOT NULL,
     Email_addresses VARCHAR(255),
     Phone_numbers VARCHAR(255)
@@ -13,6 +14,7 @@ CREATE TABLE Hotel (
     Stars INT NOT NULL CHECK (Stars > 0 AND Stars <= 5),
     Number_of_rooms INT NOT NULL CHECK (Number_of_rooms >= 0),
     Address VARCHAR(255) NOT NULL,
+    City VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL,
     Phone_numbers VARCHAR(255),
     Manager_id INT,
@@ -36,6 +38,7 @@ CREATE TABLE Customer (
     Customer_id INT PRIMARY KEY AUTO_INCREMENT,
     Customer_name VARCHAR(255) NOT NULL,
     Address VARCHAR(255) NOT NULL,
+    City VARCHAR(255) NOT NULL,
     SSN VARCHAR(255) UNIQUE NOT NULL,
     Registration_date DATE NOT NULL
 );
@@ -44,6 +47,7 @@ CREATE TABLE Employee (
     Employee_id INT PRIMARY KEY AUTO_INCREMENT,
     Employee_Name VARCHAR(255) NOT NULL,
     Address VARCHAR(255),
+    City VARCHAR(255),
     SSN VARCHAR(255) UNIQUE NOT NULL,
     Employee_Role VARCHAR(255),
     Hotel_id INT NOT NULL,
