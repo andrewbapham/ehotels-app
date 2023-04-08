@@ -18,5 +18,4 @@ END //
 DELIMITER ;
 
 CREATE VIEW occupiedRooms AS
-SELECT r.room_id, b.start_date, b.end_date FROM Room r, Booking b, WHERE
-r.room_id = b.room_id
+SELECT r.room_id, b.start_date, b.end_date FROM room r, booking b WHERE r.room_id = b.room_id

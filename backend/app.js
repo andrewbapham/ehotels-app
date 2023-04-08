@@ -88,11 +88,11 @@ app.get("/api/customers/findroom", (req, res) => {
   roomQuery += " AND Room.hotel_id = Hotel.hotel_id";
 
   let chainInfoQuery =
-    "SELECT availRooms.*, Hotel.hotel_name, Hotel.address, Hotel.city, Hotel.stars, Hotel_chain.Chain_name FROM (" +
+    "SELECT availRooms.*, Hotel.hotel_name, Hotel.address, Hotel.city, Hotel.stars, Hotel_chain.chain_name FROM (" +
     roomQuery +
     ") availRooms, Hotel, Hotel_chain WHERE availRooms.hotel_id = Hotel.hotel_id AND Hotel.chain_id = Hotel_chain.chain_id";
 
-  //console.log(chainInfoQuery);
+  console.log(chainInfoQuery);
   db.query(chainInfoQuery, (err, result) => {
     if (err) {
       console.log(err);
