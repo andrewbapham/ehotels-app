@@ -31,6 +31,8 @@ function DisplayData(props) {
         <option value="employee">Employees</option>
         <option value="hotel">Hotel</option>
         <option value="room">Room</option>
+        <option value="booking">Booking</option>
+        <option value="renting">Renting</option>
       </select>
       {data.length === 0 ? "Table is empty." : <DataTable data={data} />}
     </>

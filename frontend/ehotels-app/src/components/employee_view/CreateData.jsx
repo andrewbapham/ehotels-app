@@ -10,14 +10,20 @@ function CreateData(props) {
 
   useEffect(() => {
     axios
-      .get(baseURL + "/api/employee/headers?table=" + table)
+      .get(
+        baseURL +
+          "/api/employee/headers?table=" +
+          table +
+          "&action=" +
+          props.action
+      )
       .then((res) => {
         setHeaders(res.data);
       })
       .catch((err) => {
         //console.log(err);
       });
-  }, [table]);
+  }, [table, props.action]);
   return (
     <>
       {/*
@@ -33,8 +39,14 @@ function CreateData(props) {
         <option value="employee">Employees</option>
         <option value="hotel">Hotel</option>
         <option value="room">Room</option>
+        <option value="booking">Booking</option>
       </select>
-      <CreateDataForm headers={headers} setInputVals={setInputVals} />
+      <CreateDataForm
+        headers={headers}
+        setInputVals={setInputVals}
+        action={props.action}
+        table={table}
+      />
     </>
   );
 }
