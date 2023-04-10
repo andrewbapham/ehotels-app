@@ -19,8 +19,12 @@ app.use(function (req, res, next) {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
+  res.header("Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, OPTIONS");
   next();
 });
+
+//Allow parsing of JSON in request body
+app.use(express.json());
 
 db.connect((err) => {
   if (err) {
@@ -48,15 +52,23 @@ app.get("/api/employee", (req, res) => {
 
 //Returns column headers for the requested table
 app.get("/api/employee/headers", (req, res) => {
-  console.log("received");
   db.query("SHOW COLUMNS FROM " + req.query.table, (err, result) => {
     if (err) {
       console.log(err);
     } else {
-      const headers = result.map((col) => {
+      const headers = [];
+      result.forEach((col) => {
         let obj = {};
         obj[col.Field] = col.Type;
-        return obj;
+        if (
+          req.query.action === "create" &&
+          col.Field.includes("id") &&
+          col.Field.includes(req.query.table)
+        ) {
+          //console.log("skipped column: " + col.Field);
+          return;
+        }
+        headers.push(obj);
       });
       console.log(headers);
       res.send(headers);
@@ -92,7 +104,6 @@ app.get("/api/customers/findroom", (req, res) => {
     roomQuery +
     ") availRooms, Hotel, Hotel_chain WHERE availRooms.hotel_id = Hotel.hotel_id AND Hotel.chain_id = Hotel_chain.chain_id";
 
-  console.log(chainInfoQuery);
   db.query(chainInfoQuery, (err, result) => {
     if (err) {
       console.log(err);
@@ -115,8 +126,11 @@ let searchQueries = {
   numRoomsInHotel: "",
 };
 
+// Generate the SQL clause for the given parameter and value
 function generateClause(param, value) {
+  // Creates a string of the form "param = 'value'", eg. "Hotel.stars = 5"
   let clause = searchQueries[param] + value;
+  //Special cases for date range and numRoomsInHotel
   if (typeof value === "object" && param === "dateRange") {
     clause =
       "Room.room_id NOT IN (SELECT r.room_id FROM occupiedrooms r WHERE r.start_date <= '" +
@@ -136,6 +150,94 @@ function generateClause(param, value) {
   }
   return clause;
 }
+
+//Create endpoint that creates a new row in the requested table
+app.post("/api/employee/create", (req, res) => {
+  let columnInsert = "(";
+  const post = req.body;
+  const columns = Object.keys(post);
+
+  // Create list of columns to insert into (e.g. (customer_name, address, city), etc.)
+  for (let i = 0; i < columns.length; i++) {
+    if (i === columns.length - 1) {
+      columnInsert += columns[i] + ")";
+    } else {
+      columnInsert += columns[i] + ", ";
+    }
+  }
+
+  let sql = "INSERT INTO " + req.query.table + " " + columnInsert + " VALUES ?";
+  let values = [];
+  values.push(Object.values(post));
+  //Use parametrized queries (?) to prevent SQL injection
+  //Replaces ? with all values in the values array
+  db.query(sql, [values], (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send("Error inserting row into table");
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.put("/api/employee/update", (req, res) => {
+  const post = req.body;
+  const columns = Object.keys(post);
+
+  let setValues = "";
+
+  //Get column names and data types
+  const headers = [];
+  db.query("SHOW COLUMNS FROM " + req.query.table, (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      result.forEach((col) => {
+        //Get column names and types to build query
+        let obj = {};
+        obj.name = col.Field;
+        obj.type = col.Type;
+
+        headers.push(obj);
+      });
+
+      // Loop adds all SET = Values to the query
+      for (let i = 0; i < columns.length; i++) {
+        //Use column types to determine whether or not to add quotes
+        setValues += columns[i] + " = ";
+        if (!headers[i].type.includes("int")) {
+          setValues += "'" + post[columns[i]] + "'";
+        } else {
+          setValues += post[columns[i]];
+        }
+        if (i < columns.length - 1) setValues += ", ";
+      }
+
+      let sql =
+        "UPDATE " +
+        req.query.table +
+        " SET " +
+        setValues +
+        " WHERE " +
+        req.query.table +
+        "_id" +
+        " = " +
+        post[req.query.table + "_id"];
+
+      let values = [];
+      values.push(Object.values(post));
+      db.query(sql, [values], (err, result) => {
+        if (err) {
+          console.log(err);
+          res.status(400).send("Error inserting row into table");
+        } else {
+          res.send(result);
+        }
+      });
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
