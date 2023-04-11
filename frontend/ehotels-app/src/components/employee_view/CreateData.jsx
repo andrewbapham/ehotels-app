@@ -40,6 +40,7 @@ function CreateData(props) {
         <option value="hotel">Hotel</option>
         <option value="room">Room</option>
         <option value="booking">Booking</option>
+        <option value="renting">Renting</option>
       </select>
       <CreateDataForm
         headers={headers}

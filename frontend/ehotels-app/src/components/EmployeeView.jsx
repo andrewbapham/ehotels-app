@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import DisplayData from "./employee_view/DisplayData";
 import CreateData from "./employee_view/CreateData";
+import DeleteData from "./employee_view/DeleteData";
 
 function EmployeeView(props) {
   const [action, setAction] = useState("create");
@@ -32,6 +33,10 @@ function EmployeeView(props) {
         <label htmlFor="update-data-employee">Update Data</label>
       </div>
       <CreateData action={action} />
+      <div className="delete-data-section">
+        <h4>Delete Data</h4>
+        <DeleteData />
+      </div>
     </div>
   );
 }

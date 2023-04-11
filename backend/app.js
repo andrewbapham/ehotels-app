@@ -174,7 +174,9 @@ app.post("/api/employee/create", (req, res) => {
   db.query(sql, [values], (err, result) => {
     if (err) {
       console.log(err);
-      res.status(400).send("Error inserting row into table");
+      res
+        .status(400)
+        .send("Error inserting row into table - " + err.sqlMessage);
     } else {
       res.send(result);
     }
@@ -230,11 +232,38 @@ app.put("/api/employee/update", (req, res) => {
       db.query(sql, [values], (err, result) => {
         if (err) {
           console.log(err);
-          res.status(400).send("Error inserting row into table");
+          res
+            .status(400)
+            .send("Error inserting row into table - " + err.sqlMessage);
         } else {
           res.send(result);
         }
       });
+    }
+  });
+});
+
+app.delete("/api/employee/delete", (req, res) => {
+  //Unique case, hotel_chain's id is named chain_id
+  if (req.query.table === "hotel_chain") {
+    sql = "DELETE FROM Hotel_chain WHERE chain_id = " + req.query.id;
+  } else {
+    let sql =
+      "DELETE FROM " +
+      req.query.table +
+      " WHERE " +
+      req.query.table +
+      "_id" +
+      " = " +
+      req.query.id;
+  }
+
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send("Error deleting from table - " + err.sqlMessage);
+    } else {
+      res.send(result);
     }
   });
 });
