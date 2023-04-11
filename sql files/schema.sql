@@ -68,9 +68,10 @@ CREATE TABLE booking (
 );
 
 CREATE TABLE renting (
-    rent_id INT PRIMARY KEY AUTO_INCREMENT,
-    booking_id INT NOT NULL,
+    renting_id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT UNIQUE NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
+    paid BOOLEAN,
     FOREIGN KEY (booking_id) REFERENCES booking(booking_id)
 );

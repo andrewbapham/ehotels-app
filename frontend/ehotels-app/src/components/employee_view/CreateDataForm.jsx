@@ -6,6 +6,7 @@ function CreateDataForm(props) {
     "varchar(255)": "text",
     int: "number",
     date: "date",
+    "tinyint(1)": "checkbox",
   });
   const baseURL = "http://localhost:3000";
 
@@ -15,6 +16,11 @@ function CreateDataForm(props) {
   const [success, setSuccess] = useState(false);
 
   const handleInputChange = (e) => {
+    console.log(e);
+    if (e.target.type === "checkbox") {
+      setFormData({ ...formData, [e.target.name]: e.target.checked });
+      return;
+    }
     const target = e.target;
     const value = target.value;
     const name = target.name;
@@ -24,11 +30,16 @@ function CreateDataForm(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     //Reset Success/Error
+    setError({});
+    setReqError({});
     setSuccess(false);
     //Check if any input fields are empty
     let emptyFields = [];
     props.headers.forEach((headerObj) => {
       let headerText = Object.keys(headerObj)[0];
+      if (headerText === "paid" && formData[headerText] === undefined) {
+        formData[headerText] = false;
+      }
       if (formData[headerText] === undefined) {
         emptyFields.push(headerText);
       }
@@ -80,7 +91,6 @@ function CreateDataForm(props) {
     // [0] since Object.keys returns an array of keys, and there is only one key
     let headerText = Object.keys(headerObj)[0];
     //Don't show the id fields if we are creating a new entry
-
     inputs.push(
       <div className="input-field" key={"div_" + headerText}>
         <label htmlFor={headerText}>{headerText + ":"}</label>

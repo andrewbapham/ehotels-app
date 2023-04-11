@@ -30,6 +30,7 @@ function DisplayData(props) {
         <option value="customer">Customer</option>
         <option value="employee">Employees</option>
         <option value="hotel">Hotel</option>
+        <option value="hotel_chain">Hotel Chain</option>
         <option value="room">Room</option>
         <option value="booking">Booking</option>
         <option value="renting">Renting</option>
