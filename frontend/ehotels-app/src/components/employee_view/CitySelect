@@ -1,0 +1,32 @@
+import {React, useState} from "react";
+
+function CitySelect() {
+  const [selectedCity, setSelectedCity] = useState("");
+
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // display results on submit
+  };
+
+  return (
+    <div>
+      <label htmlFor="city-dropdown">Select a city:</label>
+      <select id="city-dropdown" value={selectedCity} onChange={handleCityChange}>
+        <option value="">Select a city</option>
+        <option value="New York">New York</option>
+        <option value="Newark">Newark</option>
+        <option value="Jersey City">Jersey City</option>
+        <option value="Huntington Beach">Huntington Beach</option>
+        <option value="Los Angeles">Los Angeles</option>
+        <option value="San Francisco">San Francisco</option>
+        <option value="Trenton">Trenton</option>
+      </select>
+    </div>
+  );
+}
+
+export default CitySelect;
