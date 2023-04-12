@@ -7,7 +7,8 @@ function RoomDisplay(props) {
   props.rooms.forEach((room) => {
     roomElems.push(
       <tr key={room.room_id}>
-        <td>{room.price}</td>
+        <td>{room.room_id}</td>
+        <td>${room.price}</td>
         <td>{room.stars}</td>
         <td>{room.capacity}</td>
         <td>{room.amenities}</td>
@@ -23,6 +24,7 @@ function RoomDisplay(props) {
     <table>
       <thead>
         <tr>
+          <th>Room ID</th>
           <th>Price</th>
           <th>Stars</th>
           <th>Capacity</th>
@@ -33,7 +35,13 @@ function RoomDisplay(props) {
           <th>Hotel Chain</th>
         </tr>
       </thead>
-      <tbody>{roomElems}</tbody>
+      <tbody>
+        {roomElems.length === 0 ? (
+          <p>No rooms were found. Please try different criteria.</p>
+        ) : (
+          roomElems
+        )}
+      </tbody>
     </table>
   );
 }

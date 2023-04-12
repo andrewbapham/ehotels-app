@@ -184,6 +184,27 @@ function generateClause(param, value) {
   return clause;
 }
 
+app.post("/api/customer/book", (req, res) => {
+  let sql =
+    "INSERT INTO Booking (customer_id, room_id, start_date, end_date) VALUES ?";
+  let values = [];
+
+  values.push(Object.values(req.body));
+  console.log(values);
+  db.query(sql, [values], (err, result) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(400)
+        .send("Error inserting row into table - " + err.sqlMessage);
+    } else {
+      console.log(result);
+
+      res.send(result);
+    }
+  });
+});
+
 //Endpoint that creates new customer account, for the customer view
 app.post("/api/customer/create", (req, res) => {
   let sql =

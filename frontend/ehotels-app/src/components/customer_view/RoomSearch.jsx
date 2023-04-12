@@ -3,6 +3,7 @@ import RoomDisplay from "./RoomDisplay";
 import RoomSearchForm from "./RoomSearchForm";
 import axios from "axios";
 import qs from "qs";
+import BookRoom from "./BookRoom";
 
 function RoomSearch(props) {
   const [searchParams, setSearchParams] = useState({
@@ -45,6 +46,7 @@ function RoomSearch(props) {
         searchParams={searchParams}
         setSearchParams={setSearchParams}
       />
+      <BookRoom />
     </div>
   );
 }
