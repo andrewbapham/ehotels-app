@@ -42,6 +42,23 @@ BEGIN
 	END IF;
 END//
 
+-- Calculates the price of a booking on insertion
+CREATE TRIGGER calculate_booking_price
+BEFORE INSERT ON Booking
+FOR EACH ROW
+BEGIN
+	SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT Room.price FROM Booking INNER JOIN Room ON Room.room_id = Booking.room_id WHERE Room.room_id = NEW.room_id));
+END //
+
+CREATE TRIGGER calculate_booking_price_on_update
+BEFORE UPDATE ON Booking
+FOR EACH ROW
+BEGIN
+	IF NEW.start_date <> OLD.start_date OR NEW.end_date <> OLD.end_date THEN
+		SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT Room.price FROM Booking INNER JOIN Room ON Room.room_id = Booking.room_id WHERE Room.room_id = NEW.room_id AND Booking.booking_id = NEW.booking_id));
+	END IF;
+END //
+
 DELIMITER ;
 CREATE VIEW occupiedRooms AS
-SELECT r.room_id, b.start_date, b.end_date FROM room r, booking b WHERE r.room_id = b.room_id
+SELECT r.room_id, b.start_date, b.end_date FROM room r, booking b WHERE r.room_id = b.room_id;
