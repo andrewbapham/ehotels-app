@@ -1,3 +1,6 @@
+
+
+
 -- Hotel_chain data
 INSERT INTO Hotel_Chain (Chain_id, Central_office_address, Central_office_city, Number_of_hotels, Email_addresses, Phone_numbers, Chain_name)
 VALUES 
@@ -21,50 +24,50 @@ VALUES (1, 4, 5, '123 Main St', 'Seattle', 'hotel1@hotelchain.com', '111-555-123
 -- Hotels for Hotel Chain 2
 INSERT INTO Hotel (Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES 
-(9, 4, 6, '1234 Main St', 'Seattle', 'hotel9@hotels-r-us.com', '(555) 555-0009', 'Magnolia Hotel', 1, 2),
-(10, 3, 7, '5678 Elm St', 'Portland', 'hotel10@hotels-r-us.com', '(555) 555-0010', 'Pine Hotel', 2, 2),
-(11, 5, 6, '9101 Maple St', 'San Francisco', 'hotel11@hotels-r-us.com', '(555) 555-0011', 'Redwood Hotel', 3, 2),
-(12, 4, 5, '1213 Oak St', 'Los Angeles', 'hotel12@hotels-r-us.com', '(555) 555-0012', 'Willow Hotel', 4, 2),
-(13, 3, 5, '1415 Cedar St', 'San Diego', 'hotel13@hotels-r-us.com', '(555) 555-0013', 'Sequoia Hotel', 5, 2),
-(14, 5, 6, '1617 Pine St', 'Los Angeles', 'hotel14@hotels-r-us.com', '(555) 555-0014', 'Sunrise Hotel', 6, 2),
-(15, 4, 7, '1819 Birch St', 'Phoenix', 'hotel15@hotels-r-us.com', '(555) 555-0015', 'Canyon Hotel', 7, 2),
-(16, 3, 5, '2021 Spruce St', 'Dallas', 'hotel16@hotels-r-us.com', '(555) 555-0016', 'Elm Hotel', 8, 2);
+(9, 4, 6, '1234 Main St', 'Seattle', 'hotel9@hotels-r-us.com', '(555) 555-0009', 'Magnolia Hotel', 9, 2),
+(10, 3, 7, '5678 Elm St', 'Portland', 'hotel10@hotels-r-us.com', '(555) 555-0010', 'Pine Hotel', 10, 2),
+(11, 5, 6, '9101 Maple St', 'San Francisco', 'hotel11@hotels-r-us.com', '(555) 555-0011', 'Redwood Hotel', 11, 2),
+(12, 4, 5, '1213 Oak St', 'Los Angeles', 'hotel12@hotels-r-us.com', '(555) 555-0012', 'Willow Hotel', 12, 2),
+(13, 3, 5, '1415 Cedar St', 'San Diego', 'hotel13@hotels-r-us.com', '(555) 555-0013', 'Sequoia Hotel', 13, 2),
+(14, 5, 6, '1617 Pine St', 'Los Angeles', 'hotel14@hotels-r-us.com', '(555) 555-0014', 'Sunrise Hotel', 14, 2),
+(15, 4, 7, '1819 Birch St', 'Phoenix', 'hotel15@hotels-r-us.com', '(555) 555-0015', 'Canyon Hotel', 15, 2),
+(16, 3, 5, '2021 Spruce St', 'Dallas', 'hotel16@hotels-r-us.com', '(555) 555-0016', 'Elm Hotel', 16, 2);
 
 -- Hotels for Hotel Chain 3
 INSERT INTO Hotel (Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES
-    (17, 5, 7, '123 Main St', 'Chicago', 'hotel17@midwesthotels.com', '123-456-7890', 'Midwest Plaza', NULL, 3),
-    (18, 5, 7, '456 Elm St', 'Chicago', 'hotel18@midwesthotels.com', '123-456-7890', 'Midwest Suites', NULL, 3),
-    (19, 5, 6, '789 Oak St', 'Chicago', 'hotel19@midwesthotels.com', '123-456-7890', 'Midwest Grand', NULL, 3),
-    (20, 4, 5, '321 Maple Ave', 'Milwaukee', 'hotel20@midwesthotels.com', '123-456-7890', 'Midwest Inn', NULL, 3),
-    (21, 2, 6, '654 Birch Rd', 'Milwaukee', 'hotel21@midwesthotels.com', '123-456-7890', 'Midwest Lodge', NULL, 3),
-    (22, 1, 5, '987 Walnut Blvd', 'Madison', 'hotel22@midwesthotels.com', '123-456-7890', 'Midwest House', NULL, 3),
-    (23, 5, 7, '147 Cherry St', 'Madison', 'hotel23@midwesthotels.com', '123-456-7890', 'Midwest View', NULL, 3),
-    (24, 3, 7, '258 Pine Rd', 'Madison', 'hotel24@midwesthotels.com', '123-456-7890', 'Midwest Garden', NULL, 3);
+    (17, 5, 7, '123 Main St', 'Chicago', 'hotel17@midwesthotels.com', '123-456-7890', 'Midwest Plaza', 17, 3),
+    (18, 5, 7, '456 Elm St', 'Chicago', 'hotel18@midwesthotels.com', '123-456-7890', 'Midwest Suites', 18, 3),
+    (19, 5, 6, '789 Oak St', 'Chicago', 'hotel19@midwesthotels.com', '123-456-7890', 'Midwest Grand', 19, 3),
+    (20, 4, 5, '321 Maple Ave', 'Milwaukee', 'hotel20@midwesthotels.com', '123-456-7890', 'Midwest Inn', 20, 3),
+    (21, 2, 6, '654 Birch Rd', 'Milwaukee', 'hotel21@midwesthotels.com', '123-456-7890', 'Midwest Lodge', 21, 3),
+    (22, 1, 5, '987 Walnut Blvd', 'Madison', 'hotel22@midwesthotels.com', '123-456-7890', 'Midwest House', 22, 3),
+    (23, 5, 7, '147 Cherry St', 'Madison', 'hotel23@midwesthotels.com', '123-456-7890', 'Midwest View', 23, 3),
+    (24, 3, 7, '258 Pine Rd', 'Madison', 'hotel24@midwesthotels.com', '123-456-7890', 'Midwest Garden', 24, 3);
 
 -- Hotels for Hotel Chain 4
 INSERT INTO Hotel (Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES 
-    (25, 4, 7, '123 Main St', 'Los Angeles', 'hotel25@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Los Angeles', NULL, 4),
-    (26, 5, 5, '456 Elm St', 'San Francisco', 'hotel26@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel San Francisco', NULL, 4),
-    (27, 3, 6, '789 Oak St', 'Seattle', 'hotel27@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Seattle', NULL, 4),
-    (28, 4, 5, '12 Pine St', 'Miami', 'hotel28@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Miami', NULL, 4),
-    (29, 5, 6, '34 Maple St', 'New York', 'hotel29@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel New York', NULL, 4),
-    (30, 3, 5, '56 Cedar St', 'Chicago', 'hotel30@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Chicago', NULL, 4),
-    (31, 4, 7, '78 Pineapple St', 'Austin', 'hotel31@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Austin', NULL, 4),
-    (32, 2, 6, '90 Peach St', 'Chicago', 'hotel32@sunrisehotels.com', '123-456-7890', 'Sunrise Inn Chicago', NULL, 4);
+    (25, 4, 7, '123 Main St', 'Los Angeles', 'hotel25@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Los Angeles', 25, 4),
+    (26, 5, 5, '456 Elm St', 'San Francisco', 'hotel26@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel San Francisco', 26, 4),
+    (27, 3, 6, '789 Oak St', 'Seattle', 'hotel27@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Seattle', 27, 4),
+    (28, 4, 5, '12 Pine St', 'Miami', 'hotel28@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Miami', 28, 4),
+    (29, 5, 6, '34 Maple St', 'New York', 'hotel29@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel New York', 29, 4),
+    (30, 3, 5, '56 Cedar St', 'Chicago', 'hotel30@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Chicago', 30, 4),
+    (31, 4, 7, '78 Pineapple St', 'Austin', 'hotel31@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Austin', 31, 4),
+    (32, 2, 6, '90 Peach St', 'Chicago', 'hotel32@sunrisehotels.com', '123-456-7890', 'Sunrise Inn Chicago', 32, 4);
 
 -- Hotels for Hotel Chain 5
 INSERT INTO Hotel (Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES
-    (33, 4, 5, '1234 Main St', 'Los Angeles', 'hotel33@luxuryhotels.com', '123-456-7890', 'Luxury Inn', NULL, 5),
-    (34, 3, 6, '5678 Elm St', 'New York', 'hotel34@luxuryhotels.com', '123-456-7890', 'Luxury Suites', NULL, 5),
-    (35, 5, 7, '9101 Oak St', 'Chicago', 'hotel35@luxuryhotels.com', '123-456-7890', 'Luxury Lodge', NULL, 5),
-    (36, 5, 5, '1212 Maple St', 'New York', 'hotel36@luxuryhotels.com', '123-456-7890', 'Luxury Tower', NULL, 5),
-    (37, 5, 6, '1313 Oak St', 'Miami', 'hotel37@luxuryhotels.com', '123-456-7890', 'Luxury Mansion', NULL, 5),
-    (38, 3, 7, '1414 Pine St', 'San Francisco', 'hotel38@luxuryhotels.com', '123-456-7890', 'Luxury Inn and Suites', NULL, 5),
-    (39, 4, 5, '1515 Cedar St', 'Seattle', 'hotel39@luxuryhotels.com', '123-456-7890', 'Luxury Place', NULL, 5),
-    (40, 5, 7, '1616 Walnut St', 'Dallas', 'hotel40@luxuryhotels.com', '123-456-7890', 'Luxury Resort', NULL, 5);
+    (33, 4, 5, '1234 Main St', 'Los Angeles', 'hotel33@luxuryhotels.com', '123-456-7890', 'Luxury Inn', 33, 5),
+    (34, 3, 6, '5678 Elm St', 'New York', 'hotel34@luxuryhotels.com', '123-456-7890', 'Luxury Suites', 34, 5),
+    (35, 5, 7, '9101 Oak St', 'Chicago', 'hotel35@luxuryhotels.com', '123-456-7890', 'Luxury Lodge', 35, 5),
+    (36, 5, 5, '1212 Maple St', 'New York', 'hotel36@luxuryhotels.com', '123-456-7890', 'Luxury Tower', 36, 5),
+    (37, 5, 6, '1313 Oak St', 'Miami', 'hotel37@luxuryhotels.com', '123-456-7890', 'Luxury Mansion', 37, 5),
+    (38, 3, 7, '1414 Pine St', 'San Francisco', 'hotel38@luxuryhotels.com', '123-456-7890', 'Luxury Inn and Suites', 38, 5),
+    (39, 4, 5, '1515 Cedar St', 'Seattle', 'hotel39@luxuryhotels.com', '123-456-7890', 'Luxury Place', 39, 5),
+    (40, 5, 7, '1616 Walnut St', 'Dallas', 'hotel40@luxuryhotels.com', '123-456-7890', 'Luxury Resort', 40, 5);
 
 -- Room insertion data
 
@@ -522,6 +525,79 @@ INSERT INTO Room (Room_id, Price, Amenities, Capacity, View, Extendable, Problem
 VALUES (199, 175.00, 'Free Wi-Fi, TV', 4, 'No view', TRUE, 'Broken AC', 40);
 INSERT INTO Room (Room_id, Price, Amenities, Capacity, View, Extendable, Problems, Hotel_id)
 VALUES (200, 350.00, 'Free Wi-Fi, TV, mini-bar, Room Service, Balcony, Jacuzzi', 5, 'City view', TRUE, NULL, 40);
+
+-- Example entries for the other tables
+INSERT INTO customer (customer_name, address, city, ssn, registration_date)
+VALUES 
+    ('John Doe', '123 Main St', 'New York', '123-45-6789', '2022-01-01'),
+    ('Jane Smith', '456 Oak Ave', 'Chicago', '987-65-4321', '2021-12-31'),
+    ('Bob Johnson', '789 Maple Rd', 'Los Angeles', '555-55-5555', '2022-03-15'),
+    ('Alice Lee', '321 Elm St', 'San Francisco', '111-11-1111', '2022-02-28'),
+    ('Sam Rodriguez', '444 Pine Ave', 'Miami', '222-22-2222', '2022-04-01'),
+    ('Emily Davis', '555 Cedar Blvd', 'Dallas', '333-33-3333', '2021-11-15'),
+    ('Mike Wilson', '666 Spruce St', 'Atlanta', '444-44-4444', '2022-05-01'),
+    ('Kelly Brown', '777 Birch Ln', 'Seattle', '999-99-9999', '2022-06-01');
+    
+INSERT INTO booking (customer_id, start_date, end_date, price, room_id)
+VALUES 
+(1, '2023-04-15', '2023-04-18', 150.00, 10),
+(2, '2023-04-14', '2023-04-17', 200.00, 24),
+(3, '2023-04-18', '2023-04-21', 175.00, 60),
+(4, '2023-04-20', '2023-04-23', 225.00, 73),
+(5, '2023-04-16', '2023-04-19', 190.00, 101),
+(6, '2023-04-13', '2023-04-16', 165.00, 129),
+(7, '2023-04-21', '2023-04-24', 210.00, 149),
+(8, '2023-04-19', '2023-04-22', 180.00, 182),
+-- These will trigger the rental creation since they are created before the current (submission date) date
+(3, '2023-04-12', '2023-04-15', 450.00, 105),
+(6, '2023-04-12', '2023-04-14', 300.00, 50),
+(8, '2023-04-12', '2023-04-13', 200.00, 75),
+(2, '2023-04-12', '2023-04-17', 650.00, 150),
+(5, '2023-04-12', '2023-04-13', 120.00, 10);
+
+-- Employee data
+INSERT INTO employee (employee_name, address, city, ssn, employee_role, hotel_id)
+VALUES 
+    ('John Smith', '123 Main St', 'New York', '123-45-6789', 'Manager', 1),
+    ('Jane Doe', '456 Elm St', 'Los Angeles', '234-56-7890', 'Receptionist', 2),
+    ('Bob Johnson', '789 Oak St', 'Chicago', '345-67-8901', 'Housekeeper', 3),
+    ('Alice Brown', '321 Pine St', 'Miami', '456-78-9012', 'Manager', 4),
+    ('Mike Davis', '654 Cedar St', 'San Francisco', '567-89-0123', 'Maintenance', 5),
+    ('Sarah Lee', '987 Maple St', 'Seattle', '678-90-1234', 'Concierge', 6),
+    ('David Chen', '555 Birch St', 'Boston', '789-01-2345', 'Housekeeper', 7),
+    ('Karen Kim', '222 Walnut St', 'Dallas', '890-12-3456', 'Receptionist', 8),
+    ('Alex Johnson', '789 Oak St', 'Chicago', '345-67-8902', 'Maintenance', 9),
+	('Maria Rodriguez', '111 Maple Ave', 'New York', '456-78-9022', 'Manager', 10),
+	('William Lee', '222 Oak Ave', 'New York', '567-19-0123', 'Front Desk Clerk', 11),
+	('Karen Brown', '333 Cedar Ave', 'New York', '678-90-1134', 'Housekeeping', 12),
+	('Mike Davis', '444 Pine Ave', 'New York', '719-01-2345', 'Maintenance', 13),
+	('Emily Garcia', '555 Maple St', 'New York', '810-12-3456', 'Manager', 14),
+	('David Thompson', '666 Oak St', 'Boston', '901-23-4567', 'Front Desk Clerk', 15),
+	('Susan Hernandez', '777 Pine St', 'Boston', '012-34-5678', 'Housekeeping', 16),
+	('George Clark', '888 Cedar St', 'Boston', '123-45-6289', 'Maintenance', 17),
+	('Lucas Gonzalez', '999 Maple Ave', 'Boston', '231-56-7890', 'Manager', 18),
+	('Michelle Wright', '111 Oak Ave', 'Boston', '345-67-8101', 'Front Desk Clerk', 19),
+	('Erica Johnson', '222 Cedar Ave', 'Miami', '456-74-9012', 'Housekeeping', 20),
+	('Brian Wilson', '333 Pine Ave', 'Miami', '567-89-0023', 'Maintenance', 21),
+	('Jessica Martinez', '444 Maple St', 'Miami', '670-90-1234', 'Manager', 22),
+    ('Mohamed Elhabib', '293 Russell Ave', 'Madison', '291-22-9323', 'Manager', 23),
+	('Ryan Taylor', '555 Oak St', 'Miami', '780-01-2345', 'Front Desk Clerk', 24),
+	('John Smith', '123 Main St', 'Miami', '123-45-6709', 'Front Desk Clerk', 25),
+	('Lisa Thompson', '456 Park Ave', 'Miami', '232-56-7890', 'Housekeeping Staff', 26),
+	('Alex Johnson', '789 5th St', 'Miami', '345-67-2901', 'Hotel Manager', 27),
+	('Olivia Lee', '321 Oak Rd', 'Miami', '456-28-9012', 'Room Service Attendant', 28),
+	('William Davis', '654 Elm St', 'Miami', '567-89-0121', 'Concierge', 29),
+	('Sophia Martinez', '987 Maple Ave', 'Miami', '628-90-1234', 'Maintenance Technician', 30),
+	('Daniel Wilson', '741 Pine St', 'Miami', '711-01-2345', 'Security Officer', 31),
+	('Mia Garcia', '852 Cedar Rd', 'Miami', '890-12-3426', 'Front Desk Manager', 32),
+	('Mary Johnson', '456 Maple Ave', 'New York', '234-56-0890', 'Receptionist', 33),
+	('David Lee', '789 Elm St', 'San Francisco', '305-67-8901', 'Housekeeping', 34),
+	('Samantha Rodriguez', '321 Oak St', 'Los Angeles', '406-78-9012', 'Manager', 35),
+	('Michael Chen', '654 Pine St', 'Chicago', '567-89-0129', 'Receptionist', 36),
+	('Emily Kim', '987 Cedar St', 'Houston', '678-00-1234', 'Housekeeping', 37),
+	('William Davis', '159 Walnut St', 'Miami', '789-01-2322', 'Manager', 38),
+	('Sophia Martinez', '753 Cherry St', 'Dallas', '690-12-3456', 'Receptionist', 39),
+	('Luna Lovegood', '369 Burrow St', 'Phoenix', '223-45-6789', 'Front Desk Clerk', 40);
 
 
 

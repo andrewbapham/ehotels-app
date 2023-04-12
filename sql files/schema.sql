@@ -47,7 +47,7 @@ CREATE TABLE customer (
 
 CREATE TABLE employee (
     employee_id INT PRIMARY KEY AUTO_INCREMENT,
-    employee_Name VARCHAR(255) NOT NULL,
+    employee_name VARCHAR(255) NOT NULL,
     address VARCHAR(255),
     city VARCHAR(255),
     ssn VARCHAR(255) UNIQUE NOT NULL,

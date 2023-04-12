@@ -47,7 +47,7 @@ CREATE TRIGGER calculate_booking_price
 BEFORE INSERT ON Booking
 FOR EACH ROW
 BEGIN
-	SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT Room.price FROM Booking INNER JOIN Room ON Room.room_id = Booking.room_id WHERE Room.room_id = NEW.room_id));
+	SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT Room.price FROM Room WHERE Room.room_id = NEW.room_id));
 END //
 
 CREATE TRIGGER calculate_booking_price_on_update
