@@ -599,6 +599,24 @@ VALUES
 	('Sophia Martinez', '753 Cherry St', 'Dallas', '690-12-3456', 'Receptionist', 39),
 	('Luna Lovegood', '369 Burrow St', 'Phoenix', '223-45-6789', 'Front Desk Clerk', 40);
 
+    -- Indexes
+
+-- We often filter hotels by city, this index will make such queries more efficient
+CREATE INDEX ix_hotel_city
+ON Hotel(City);
+
+-- Customers will often filter rooms most often by city and price
+CREATE INDEX ix_room_price_city
+ON Room(City, Price);
+
+-- Customers will also filter by city and quality
+CREATE INDEX ix_hotel_stars
+ON Hotel(City, Stars);
+
+-- This index helps search for rooms of a certain capacity while filtering by location
+CREATE INDEX ix_room_hotel_capacity
+ON Room(Hotel_id, capacity);
+
 
 
 
