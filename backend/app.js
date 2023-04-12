@@ -91,18 +91,22 @@ app.get("/api/customers/findroom", (req, res) => {
 
   //Add all the where parts of the query together
   for (let i = 0; i < queryStatements.length; i++) {
+    if (!roomQuery) continue;
     if (i === 0) {
       roomQuery += queryStatements[i];
     } else {
       roomQuery += " AND " + queryStatements[i];
     }
   }
+
   roomQuery += " AND Room.hotel_id = Hotel.hotel_id";
 
   let chainInfoQuery =
     "SELECT availRooms.*, Hotel.hotel_name, Hotel.address, Hotel.city, Hotel.stars, Hotel_chain.chain_name FROM (" +
     roomQuery +
     ") availRooms, Hotel, Hotel_chain WHERE availRooms.hotel_id = Hotel.hotel_id AND Hotel.chain_id = Hotel_chain.chain_id";
+
+  console.log(chainInfoQuery);
 
   db.query(chainInfoQuery, (err, result) => {
     if (err) {
@@ -121,7 +125,8 @@ let searchQueries = {
   priceGreaterThan: "Room.price >= ",
   stars: "Hotel.stars = ",
   chain: "Hotel.chain_id = ",
-  amenities: "Rooms.amenities LIKE ",
+  amenities: "Room.amenities LIKE ",
+  view: "Room.view LIKE ",
   dateRange: "Booking.startDate <= ",
   numRoomsInHotel: "",
 };
@@ -147,6 +152,18 @@ function generateClause(param, value) {
       "') AND Room.hotel_id = h.hotel_id GROUP BY Room.hotel_id HAVING COUNT(*) >= " +
       value.numRooms +
       ") counts)";
+  } else if (param === "amenities") {
+    clause = "Room.amenities LIKE '%";
+    //Add a like clause for each amenity
+    value.forEach((amenity) => {
+      clause += amenity + "%' AND Room.amenities LIKE '%";
+    });
+    //Remove the last " AND Room.amenities LIKE '%"
+    clause = clause.slice(0, -27);
+    console.log(clause);
+  } else if (value === "any") {
+    //Placeholder to replace with a valid SQL clause if any value is acceptable
+    clause = "TRUE";
   }
   return clause;
 }

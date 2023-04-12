@@ -6,11 +6,21 @@ import qs from "qs";
 
 function RoomSearch(props) {
   const [searchParams, setSearchParams] = useState({
-    stars: 3,
-    priceLessThan: 150,
+    stars: "any",
+    priceLessThan: 1000,
+    priceGreaterThan: 0,
+    capacity: "any",
+    amenities: [],
+    view: "any",
+    hotel_name: "",
+    city: "'New York'",
+    chain: "any",
+    priceAny: true,
   });
   const [rooms, setRooms] = useState([]);
+  const [error, setError] = useState("");
   useEffect(() => {
+    setError("");
     axios
       .get(
         "http://localhost:3000/api/customers/findroom?" +
@@ -22,6 +32,7 @@ function RoomSearch(props) {
       })
       .catch((err) => {
         console.error(err);
+        setError("Couldn't fetch data from server.");
       });
   }, [searchParams]);
 
@@ -35,7 +46,10 @@ function RoomSearch(props) {
     <div>
       <h3>Room Search</h3>
       <RoomDisplay rooms={rooms} />
-      <RoomSearchForm setSearchParams={setSearchParams} />
+      <RoomSearchForm
+        searchParams={searchParams}
+        setSearchParams={setSearchParams}
+      />
       <button onClick={changeState}> Change params </button>
     </div>
   );

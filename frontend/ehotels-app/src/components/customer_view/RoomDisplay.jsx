@@ -3,7 +3,7 @@ import React from "react";
 function RoomDisplay(props) {
   const roomElems = [];
   //console.log(props.rooms[0].amenities);
-  console.log(props.rooms[0]);
+
   props.rooms.forEach((room) => {
     roomElems.push(
       <tr key={room.room_id}>
