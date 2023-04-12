@@ -85,6 +85,16 @@ app.get("/api/customers/findroom", (req, res) => {
     if (!(key in searchQueries)) {
       continue;
     } else if (req.query[key] !== "") {
+      if (key === "numRoomsInHotel") {
+        //Pass all value needed to generate clause for numRoomsInHotel
+        let valueObject = {
+          startDate: req.query.dateRange.startDate,
+          endDate: req.query.dateRange.endDate,
+          numRooms: req.query.numRoomsInHotel,
+        };
+
+        queryStatements.push(generateClause(key, valueObject));
+      }
       queryStatements.push(generateClause(key, req.query[key]));
     }
   }
@@ -128,7 +138,7 @@ let searchQueries = {
   amenities: "Room.amenities LIKE ",
   view: "Room.view LIKE ",
   dateRange: "Booking.startDate <= ",
-  numRoomsInHotel: "",
+  numRoomsInHotel: " ",
 };
 
 // Generate the SQL clause for the given parameter and value
@@ -144,6 +154,12 @@ function generateClause(param, value) {
       value.startDate +
       "')";
   } else if (param === "numRoomsInHotel") {
+    if (!value.startDate || !value.endDate || !value.numRooms) {
+      // If any parmeters are undefined, skip this clause
+      console.log("missing parameter for numRoomsInHotel");
+      return "TRUE";
+    }
+    console.log("building numRooms clause");
     clause =
       "Room.hotel_id IN (SELECT counts.hotel_id FROM (SELECT Room.hotel_id, count(*) FROM Room, hotel h, Booking b WHERE  Room.room_id NOT IN (SELECT r.room_id FROM occupiedrooms r WHERE r.start_date <= '" +
       value.endDate +

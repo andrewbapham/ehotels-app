@@ -72,6 +72,16 @@ function RoomSearchForm(props) {
         // Update search params with new amenity list
         setSearchParams({ ...searchParams, ["amenities"]: updatedAmenities });
       }
+    } else if (name === "startDate" || name === "endDate") {
+      if (!searchParams.dateRange) {
+        setSearchParams({ ...searchParams, ["dateRange"]: { [name]: value } });
+      } else {
+        console.log({ ...searchParams });
+        setSearchParams({
+          ...searchParams,
+          dateRange: { ...searchParams.dateRange, [name]: value },
+        });
+      }
     } else {
       setSearchParams({ ...searchParams, [name]: value });
     }
@@ -282,7 +292,7 @@ function RoomSearchForm(props) {
           <select
             id="hotelChain"
             name="chain"
-            value={searchParams.hotelChain}
+            value={searchParams.chain}
             onChange={handleInputChange}
           >
             <option value="1">Hotel Chain Inc.</option>
@@ -292,6 +302,41 @@ function RoomSearchForm(props) {
             <option value="5">Luxury Hotels</option>
             <option value="any">Any</option>
           </select>
+        </div>
+
+        <div>
+          <label htmlFor="startDate">Start Date:</label>
+          <input
+            type="date"
+            id="startDate"
+            name="startDate"
+            value={
+              (searchParams.dateRange && searchParams.dateRange.startDate) || ""
+            }
+            onChange={handleInputChange}
+          />
+          <label htmlFor="endDate">End Date:</label>
+          <input
+            type="date"
+            id="endDate"
+            name="endDate"
+            value={
+              (searchParams.dateRange && searchParams.dateRange.endDate) || ""
+            }
+            onChange={handleInputChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="numRoomsInHotel">
+            Number of available rooms in hotel (greater than)
+          </label>
+          <input
+            type="number"
+            id="numRoomsInHotel"
+            name="numRoomsInHotel"
+            value={searchParams.numRoomsInHotel || 0}
+            onChange={handleInputChange}
+          />
         </div>
       </fieldset>
     </form>

@@ -16,6 +16,7 @@ function RoomSearch(props) {
     city: "'New York'",
     chain: "any",
     priceAny: true,
+    numRoomsInHotel: 0,
   });
   const [rooms, setRooms] = useState([]);
   const [error, setError] = useState("");
@@ -36,12 +37,6 @@ function RoomSearch(props) {
       });
   }, [searchParams]);
 
-  const changeState = () => {
-    setSearchParams({
-      stars: 4,
-      priceLessThan: 200,
-    });
-  };
   return (
     <div>
       <h3>Room Search</h3>
@@ -50,7 +45,6 @@ function RoomSearch(props) {
         searchParams={searchParams}
         setSearchParams={setSearchParams}
       />
-      <button onClick={changeState}> Change params </button>
     </div>
   );
 }
