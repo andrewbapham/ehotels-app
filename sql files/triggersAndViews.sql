@@ -76,3 +76,21 @@ JOIN room r ON h.hotel_id = r.hotel_id
 LEFT JOIN booking b ON r.room_id = b.room_id AND (CURDATE() BETWEEN b.start_date AND b.end_date)
 WHERE b.booking_id IS NULL
 GROUP BY h.city;
+
+-- Indexes
+
+-- We often filter hotels by city, this index will make such queries more efficient
+CREATE INDEX ix_hotel_city
+ON Hotel(City);
+
+-- Customers will often filter rooms most often by city and price
+CREATE INDEX ix_room_price_city
+ON Room(City, Price);
+
+-- Customers will also filter by city and quality
+CREATE INDEX ix_hotel_stars
+ON Hotel(City, Stars);
+
+-- This index helps search for rooms of a certain capacity while filtering by location
+CREATE INDEX ix_room_hotel_capacity
+ON Room(Hotel_id, capacity);
