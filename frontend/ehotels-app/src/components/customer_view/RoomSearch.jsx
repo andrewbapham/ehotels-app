@@ -25,7 +25,7 @@ function RoomSearch(props) {
     setError("");
     axios
       .get(
-        "http://localhost:3000/api/customers/findroom?" +
+        "http://localhost:3000/api/customer/findroom?" +
           qs.stringify(searchParams),
         {}
       )

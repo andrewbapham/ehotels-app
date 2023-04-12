@@ -76,7 +76,32 @@ app.get("/api/employee/headers", (req, res) => {
   });
 });
 
-app.get("/api/customers/findroom", (req, res) => {
+//Get info about customer with given customer_id
+app.get("/api/customer/customer_info", (req, res) => {
+  //skip if no customer_id provided
+  if (!req.query.customer_id) {
+    res.send([]);
+    return;
+  }
+
+  let query =
+    "SELECT * FROM Customer WHERE Customer.customer_id = " +
+    req.query.customer_id;
+  db.query(query, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.status(400).send(err.message);
+    } else {
+      if (result.length === 0) {
+        res.status(400).send("No customer with that ID");
+        return;
+      }
+      res.send(result);
+    }
+  });
+});
+
+app.get("/api/customer/findroom", (req, res) => {
   //Generate query based on search parameters
   let roomQuery = "SELECT Room.* FROM Room, Hotel WHERE ";
   let queryStatements = [];
@@ -200,6 +225,28 @@ app.post("/api/customer/book", (req, res) => {
     } else {
       console.log(result);
 
+      res.send(result);
+    }
+  });
+});
+
+app.post("/api/customer/update", (req, res) => {
+  let sql = "UPDATE Customer SET ? WHERE customer_id = ?";
+  let values = [];
+
+  //Remove the registration date since it can't be updated by customers anyways
+  delete req.body.registration_date;
+
+  values.push(req.body);
+  values.push(req.body.customer_id);
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(400)
+        .send("Error inserting row into table - " + err.sqlMessage);
+    } else {
+      console.log(result);
       res.send(result);
     }
   });

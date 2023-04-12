@@ -1,6 +1,7 @@
 import React from "react";
 import RoomSearch from "./customer_view/RoomSearch";
 import CreateCustomer from "./customer_view/CreateCustomer";
+import UpdateUserInfo from "./customer_view/UpdateUserInfo";
 
 function CustomerView(props) {
   return (
@@ -9,6 +10,7 @@ function CustomerView(props) {
 
       <RoomSearch />
       <CreateCustomer />
+      <UpdateUserInfo />
     </div>
   );
 }
