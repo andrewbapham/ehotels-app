@@ -85,7 +85,7 @@ app.get("/api/customer/customer_info", (req, res) => {
   }
 
   let query =
-    "SELECT * FROM Customer WHERE Customer.customer_id = " +
+    "SELECT * FROM customer WHERE customer.customer_id = " +
     req.query.customer_id;
   db.query(query, (err, result) => {
     if (err) {
@@ -103,7 +103,7 @@ app.get("/api/customer/customer_info", (req, res) => {
 
 app.get("/api/customer/findroom", (req, res) => {
   //Generate query based on search parameters
-  let roomQuery = "SELECT Room.* FROM Room, Hotel WHERE ";
+  let roomQuery = "SELECT room.* FROM room, hotel WHERE ";
   let queryStatements = [];
   for (let key in req.query) {
     //Skip bad parameters
@@ -134,12 +134,12 @@ app.get("/api/customer/findroom", (req, res) => {
     }
   }
 
-  roomQuery += " AND Room.hotel_id = Hotel.hotel_id";
+  roomQuery += " AND room.hotel_id = hotel.hotel_id";
 
   let chainInfoQuery =
-    "SELECT availRooms.*, Hotel.hotel_name, Hotel.address, Hotel.city, Hotel.stars, Hotel_chain.chain_name FROM (" +
+    "SELECT availRooms.*, hotel.hotel_name, hotel.address, hotel.city, hotel.stars, hotel_chain.chain_name FROM (" +
     roomQuery +
-    ") availRooms, Hotel, Hotel_chain WHERE availRooms.hotel_id = Hotel.hotel_id AND Hotel.chain_id = Hotel_chain.chain_id";
+    ") availRooms, hotel, hotel_chain WHERE availRooms.hotel_id = hotel.hotel_id AND hotel.chain_id = hotel_chain.chain_id";
 
   console.log(chainInfoQuery);
 
@@ -153,27 +153,27 @@ app.get("/api/customer/findroom", (req, res) => {
 });
 
 let searchQueries = {
-  capacity: "Room.capacity = ",
-  city: "Hotel.city LIKE ",
-  priceEquals: "Room.price = ",
-  priceLessThan: "Room.price <= ",
-  priceGreaterThan: "Room.price >= ",
-  stars: "Hotel.stars = ",
-  chain: "Hotel.chain_id = ",
-  amenities: "Room.amenities LIKE ",
-  view: "Room.view LIKE ",
-  dateRange: "Booking.startDate <= ",
+  capacity: " room.capacity = ",
+  city: "hotel.city LIKE ",
+  priceEquals: " room.price = ",
+  priceLessThan: " room.price <= ",
+  priceGreaterThan: " room.price >= ",
+  stars: "hotel.stars = ",
+  chain: "hotel.chain_id = ",
+  amenities: " room.amenities LIKE ",
+  view: " room.view LIKE ",
+  dateRange: "hotel.startDate <= ",
   numRoomsInHotel: " ",
 };
 
 // Generate the SQL clause for the given parameter and value
 function generateClause(param, value) {
-  // Creates a string of the form "param = 'value'", eg. "Hotel.stars = 5"
+  // Creates a string of the form "param = 'value'", eg. "hotel.stars = 5"
   let clause = searchQueries[param] + value;
   //Special cases for date range and numRoomsInHotel
   if (typeof value === "object" && param === "dateRange") {
     clause =
-      "Room.room_id NOT IN (SELECT r.room_id FROM occupiedrooms r WHERE r.start_date <= '" +
+      " room.room_id NOT IN (SELECT r.room_id FROM occupied_rooms r WHERE r.start_date <= '" +
       value.endDate +
       "' AND r.end_date >= '" +
       value.startDate +
@@ -186,18 +186,18 @@ function generateClause(param, value) {
     }
     console.log("building numRooms clause");
     clause =
-      "Room.hotel_id IN (SELECT counts.hotel_id FROM (SELECT Room.hotel_id, count(*) FROM Room, hotel h WHERE  Room.room_id NOT IN (SELECT r.room_id FROM occupiedrooms r WHERE r.start_date <= '" +
+      " room.hotel_id IN (SELECT counts.hotel_id FROM (SELECT room.hotel_id, count(*) FROM room, hotel h WHERE  room.room_id NOT IN (SELECT r.room_id FROM occupied_rooms r WHERE r.start_date <= '" +
       value.endDate +
       "' AND r.end_date>= '" +
       value.startDate +
-      "') AND Room.hotel_id = h.hotel_id GROUP BY Room.hotel_id HAVING COUNT(*) >= " +
+      "') AND room.hotel_id = h.hotel_id GROUP BY room.hotel_id HAVING COUNT(*) >= " +
       value.numRooms +
       ") counts)";
   } else if (param === "amenities") {
-    clause = "Room.amenities LIKE '%";
+    clause = " room.amenities LIKE '%";
     //Add a like clause for each amenity
     value.forEach((amenity) => {
-      clause += amenity + "%' AND Room.amenities LIKE '%";
+      clause += amenity + "%' AND room.amenities LIKE '%";
     });
     //Remove the last " AND Room.amenities LIKE '%"
     clause = clause.slice(0, -27);
@@ -211,7 +211,7 @@ function generateClause(param, value) {
 
 app.post("/api/customer/book", (req, res) => {
   let sql =
-    "INSERT INTO Booking (customer_id, room_id, start_date, end_date) VALUES ?";
+    "INSERT INTO booking (customer_id, room_id, start_date, end_date) VALUES ?";
   let values = [];
 
   values.push(Object.values(req.body));
@@ -231,7 +231,7 @@ app.post("/api/customer/book", (req, res) => {
 });
 
 app.post("/api/customer/update", (req, res) => {
-  let sql = "UPDATE Customer SET ? WHERE customer_id = ?";
+  let sql = "UPDATE customer SET ? WHERE customer_id = ?";
   let values = [];
 
   //Remove the registration date since it can't be updated by customers anyways
@@ -255,7 +255,7 @@ app.post("/api/customer/update", (req, res) => {
 //Endpoint that creates new customer account, for the customer view
 app.post("/api/customer/create", (req, res) => {
   let sql =
-    "INSERT INTO Customer (customer_name, address, city, ssn, registration_date) VALUES ?";
+    "INSERT INTO customer (customer_name, address, city, ssn, registration_date) VALUES ?";
 
   let values = [];
   values.push(Object.values(req.body));
@@ -372,7 +372,7 @@ app.put("/api/employee/update", (req, res) => {
 app.delete("/api/employee/delete", (req, res) => {
   //Unique case, hotel_chain's id is named chain_id
   if (req.query.table === "hotel_chain") {
-    sql = "DELETE FROM Hotel_chain WHERE chain_id = " + req.query.id;
+    sql = "DELETE FROM hotel_chain WHERE chain_id = " + req.query.id;
   } else {
     let sql =
       "DELETE FROM " +

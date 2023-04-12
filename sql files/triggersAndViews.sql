@@ -1,7 +1,7 @@
 DELIMITER //
 
 CREATE TRIGGER delete_booking 
-BEFORE DELETE ON Booking
+BEFORE DELETE ON booking
 FOR EACH ROW
 BEGIN
 	SIGNAL SQLSTATE '45000'
@@ -9,7 +9,7 @@ BEGIN
 END //
 
 CREATE TRIGGER delete_renting
-BEFORE DELETE ON Renting
+BEFORE DELETE ON renting
 FOR EACH ROW
 BEGIN
 	SIGNAL SQLSTATE '45000'
@@ -18,12 +18,12 @@ END //
 
 -- Automatically makes a renting if the booking is made for the same day or earlier
 CREATE TRIGGER make_renting
-AFTER INSERT ON Booking
+AFTER INSERT ON booking
 FOR EACH ROW
 BEGIN
     IF DATE(NEW.start_date) <= DATE(NOW()) AND DATE(NEW.end_date) >= DATE(NOW()) THEN
     BEGIN
-		INSERT INTO Renting (booking_id, start_date, end_date, paid) VALUE (NEW.booking_id, NEW.start_date, NEW.end_date, 0);
+		INSERT INTO renting (booking_id, start_date, end_date, paid) VALUE (NEW.booking_id, NEW.start_date, NEW.end_date, 0);
 	END;
     END IF;
     
@@ -32,7 +32,7 @@ END//
 
 -- Stops insertion if date range is an invalid value (end date before start date)
 CREATE TRIGGER bad_date_range_booking
-BEFORE INSERT ON Booking
+BEFORE INSERT ON booking
 FOR EACH ROW
 BEGIN
 	IF NOT DATE(NEW.start_date) <= DATE(NEW.end_date) THEN
@@ -44,23 +44,23 @@ END//
 
 -- Calculates the price of a booking on insertion
 CREATE TRIGGER calculate_booking_price
-BEFORE INSERT ON Booking
+BEFORE INSERT ON booking
 FOR EACH ROW
 BEGIN
-	SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT Room.price FROM Room WHERE Room.room_id = NEW.room_id));
+	SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT room.price FROM room WHERE room.room_id = NEW.room_id));
 END //
 
 CREATE TRIGGER calculate_booking_price_on_update
-BEFORE UPDATE ON Booking
+BEFORE UPDATE ON booking
 FOR EACH ROW
 BEGIN
 	IF NEW.start_date <> OLD.start_date OR NEW.end_date <> OLD.end_date THEN
-		SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT Room.price FROM Booking INNER JOIN Room ON Room.room_id = Booking.room_id WHERE Room.room_id = NEW.room_id AND Booking.booking_id = NEW.booking_id));
+		SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT room.price FROM booking INNER JOIN room ON room.room_id = booking.room_id WHERE room.room_id = NEW.room_id AND booking.booking_id = NEW.booking_id));
 	END IF;
 END //
 
 DELIMITER ;
-CREATE VIEW occupiedRooms AS
+CREATE VIEW occupied_rooms AS
 SELECT r.room_id, b.start_date, b.end_date FROM room r, booking b WHERE r.room_id = b.room_id;
 
 CREATE VIEW room_capacity_by_hotel AS
