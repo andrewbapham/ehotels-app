@@ -10,11 +10,11 @@ function RoomDisplay(props) {
         <td>{room.price}</td>
         <td>{room.stars}</td>
         <td>{room.capacity}</td>
-        <td>{room.Amenities}</td>
+        <td>{room.amenities}</td>
         <td>{room.view}</td>
         <td>{room.hotel_name}</td>
         <td>{room.city}</td>
-        <td>{room.Chain_name}</td>
+        <td>{room.chain_name}</td>
       </tr>
     );
   });

@@ -151,6 +151,31 @@ function generateClause(param, value) {
   return clause;
 }
 
+//Endpoint that creates new customer account, for the customer view
+app.post("/api/customer/create", (req, res) => {
+  let sql =
+    "INSERT INTO Customer (customer_name, address, city, ssn, registration_date) VALUES ?";
+
+  let values = [];
+  values.push(Object.values(req.body));
+
+  //Get current date in the form YYYY-MM-DD
+  const registration_date = new Date().toISOString().slice(0, 10);
+  values[0].push(registration_date);
+
+  db.query(sql, [values], (err, result) => {
+    if (err) {
+      console.log(err);
+      res
+        .status(400)
+        .send("Error inserting row into table - " + err.sqlMessage);
+    } else {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
 //Create endpoint that creates a new row in the requested table
 app.post("/api/employee/create", (req, res) => {
   let columnInsert = "(";

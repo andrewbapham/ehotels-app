@@ -16,7 +16,6 @@ function CreateDataForm(props) {
   const [success, setSuccess] = useState(false);
 
   const handleInputChange = (e) => {
-    console.log(e);
     if (e.target.type === "checkbox") {
       setFormData({ ...formData, [e.target.name]: e.target.checked });
       return;
