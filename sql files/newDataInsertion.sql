@@ -605,9 +605,9 @@ VALUES
 CREATE INDEX ix_hotel_city
 ON Hotel(City);
 
--- Customers will often filter rooms most often by city and price
-CREATE INDEX ix_room_price_city
-ON Room(City, Price);
+-- Customers will often filter rooms most often by price
+CREATE INDEX ix_room_price
+ON Room(Price);
 
 -- Customers will also filter by city and quality
 CREATE INDEX ix_hotel_stars
