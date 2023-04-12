@@ -86,10 +86,9 @@ function RoomSearchForm(props) {
       setSearchParams({ ...searchParams, [name]: value });
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // display results on submit
   };
 
   return (
@@ -249,18 +248,6 @@ function RoomSearchForm(props) {
             <option value="any">Any</option>
           </select>
         </div>
-
-        {/* Not required in project requirements 
-         <div>
-          <label htmlFor="hotelName">Hotel Name:</label>
-          <input
-            type="text"
-            id="hotelName"
-            name="hotel_name"
-            value={searchParams.hotelName}
-            onChange={handleInputChange}
-          />
-        </div> */}
 
         <div>
           <label htmlFor="city">City:</label>
