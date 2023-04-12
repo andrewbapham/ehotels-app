@@ -78,7 +78,7 @@ app.get("/api/employee/headers", (req, res) => {
 
 app.get("/api/customers/findroom", (req, res) => {
   //Generate query based on search parameters
-  let roomQuery = "SELECT Room.* FROM Room, Hotel, Booking WHERE ";
+  let roomQuery = "SELECT Room.* FROM Room, Hotel WHERE ";
   let queryStatements = [];
   for (let key in req.query) {
     //Skip bad parameters
@@ -161,7 +161,7 @@ function generateClause(param, value) {
     }
     console.log("building numRooms clause");
     clause =
-      "Room.hotel_id IN (SELECT counts.hotel_id FROM (SELECT Room.hotel_id, count(*) FROM Room, hotel h, Booking b WHERE  Room.room_id NOT IN (SELECT r.room_id FROM occupiedrooms r WHERE r.start_date <= '" +
+      "Room.hotel_id IN (SELECT counts.hotel_id FROM (SELECT Room.hotel_id, count(*) FROM Room, hotel h WHERE  Room.room_id NOT IN (SELECT r.room_id FROM occupiedrooms r WHERE r.start_date <= '" +
       value.endDate +
       "' AND r.end_date>= '" +
       value.startDate +

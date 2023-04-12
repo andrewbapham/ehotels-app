@@ -69,7 +69,7 @@ CREATE TABLE booking (
 
 CREATE TABLE renting (
     renting_id INT PRIMARY KEY AUTO_INCREMENT,
-    booking_id INT UNIQUE NOT NULL,
+    booking_id INT NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     paid BOOLEAN,
