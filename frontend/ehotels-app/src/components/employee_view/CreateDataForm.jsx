@@ -8,7 +8,6 @@ function CreateDataForm(props) {
     date: "date",
     "tinyint(1)": "checkbox",
   });
-  const baseURL = "http://localhost:3000";
 
   const [formData, setFormData] = useState({});
   const [error, setError] = useState({});
@@ -50,7 +49,7 @@ function CreateDataForm(props) {
         return;
       }
       axios
-        .post(baseURL + "/api/employee/create?table=" + props.table, formData)
+        .post("/api/employee/create?table=" + props.table, formData)
         .then((res) => {
           if (res.status === 200) {
             //Clear the form
@@ -64,7 +63,7 @@ function CreateDataForm(props) {
         });
     } else if (props.action === "update") {
       axios
-        .put(baseURL + "/api/employee/update?table=" + props.table, formData)
+        .put("/api/employee/update?table=" + props.table, formData)
         .then((res) => {
           if (res.status === 200) {
             //Clear the form

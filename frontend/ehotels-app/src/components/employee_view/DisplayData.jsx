@@ -3,13 +3,12 @@ import DataTable from "./DataTable";
 import axios from "axios";
 
 function DisplayData(props) {
-  const baseURL = "http://localhost:3000";
   const [table, setTable] = useState("customer");
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
-      .get(baseURL + "/api/employee?table=" + table)
+      .get("/api/employee?table=" + table)
       .then((res) => {
         setData(res.data);
       })

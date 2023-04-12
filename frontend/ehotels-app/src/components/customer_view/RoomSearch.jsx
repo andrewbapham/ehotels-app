@@ -24,11 +24,7 @@ function RoomSearch(props) {
   useEffect(() => {
     setError("");
     axios
-      .get(
-        "http://localhost:3000/api/customer/findroom?" +
-          qs.stringify(searchParams),
-        {}
-      )
+      .get("/api/customer/findroom?" + qs.stringify(searchParams), {})
       .then((res) => {
         setRooms(res.data);
       })

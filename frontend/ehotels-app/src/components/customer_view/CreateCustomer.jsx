@@ -2,8 +2,6 @@ import axios from "axios";
 import { React, useState } from "react";
 
 function CreateCustomer(props) {
-  const baseURL = "http://localhost:3000";
-
   const [formData, setFormData] = useState({});
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -24,7 +22,7 @@ function CreateCustomer(props) {
 
     e.preventDefault();
     axios
-      .post(baseURL + "/api/customer/create", formData)
+      .post("/api/customer/create", formData)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {

@@ -5,7 +5,6 @@ import axios from "axios";
 import qs from "qs";
 
 function DeleteData(props) {
-  const baseURL = "http://localhost:3000";
   const [table, setTable] = useState("customer");
   const [id, setId] = useState(0);
   const [success, setSuccess] = useState(false);
@@ -13,7 +12,7 @@ function DeleteData(props) {
 
   const deleteData = () => {
     axios
-      .delete(baseURL + "/api/employee/delete?table=" + table + "&id=" + id)
+      .delete("/api/employee/delete?table=" + table + "&id=" + id)
       .then((res) => {
         console.log(res.data.affectedRows);
         if (res.status === 200 && res.data.affectedRows >= 1) {

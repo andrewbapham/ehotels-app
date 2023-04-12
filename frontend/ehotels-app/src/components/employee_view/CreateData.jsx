@@ -10,13 +10,7 @@ function CreateData(props) {
 
   useEffect(() => {
     axios
-      .get(
-        baseURL +
-          "/api/employee/headers?table=" +
-          table +
-          "&action=" +
-          props.action
-      )
+      .get("/api/employee/headers?table=" + table + "&action=" + props.action)
       .then((res) => {
         setHeaders(res.data);
       })

@@ -2,7 +2,6 @@ import { React, useState } from "react";
 import axios from "axios";
 
 function BookRoom(props) {
-  const baseURL = "http://localhost:3000";
   const [formData, setFormData] = useState({});
   const [err, setErr] = useState("");
   const [success, setSuccess] = useState(false);
@@ -23,7 +22,7 @@ function BookRoom(props) {
 
     e.preventDefault();
     axios
-      .post(baseURL + "/api/customer/book", formData)
+      .post("/api/customer/book", formData)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {

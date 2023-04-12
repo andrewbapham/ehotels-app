@@ -17,7 +17,7 @@ function UpdateUserInfo(props) {
     setError("");
     axios
       .get(
-        "http://localhost:3000/api/customer/customer_info?customer_id=" +
+        "/api/customer/customer_info?customer_id=" +
           //If customer_id is undefined, set it to an empty string, backend will skip query
           (formData.customer_id || "")
       )
@@ -38,7 +38,7 @@ function UpdateUserInfo(props) {
     setError("");
 
     axios
-      .post("http://localhost:3000/api/customer/update", formData)
+      .post("/api/customer/update", formData)
       .then((res) => {
         console.log(res);
         if (res.status === 200) {
