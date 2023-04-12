@@ -106,7 +106,9 @@ function UpdateUserInfo(props) {
           onChange={handleInputChange}
         />
       </label>
-      <p>Registered on: {formData.registration_date?.slice(0, 10)}</p>
+      {formData.registration_date && (
+        <p>Registered on: {formData.registration_date?.slice(0, 10)}</p>
+      )}
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
       {success && <p style={{ color: "green" }}>Success!</p>}
       <button type="submit">Submit</button>
