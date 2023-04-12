@@ -33,24 +33,23 @@ function CreateDataForm(props) {
     setError({});
     setReqError({});
     setSuccess(false);
-    //Check if any input fields are empty
-    let emptyFields = [];
-    props.headers.forEach((headerObj) => {
-      let headerText = Object.keys(headerObj)[0];
-      if (headerText === "paid" && formData[headerText] === undefined) {
-        formData[headerText] = false;
-      }
-      if (formData[headerText] === undefined) {
-        emptyFields.push(headerText);
-      }
-    });
-
-    if (emptyFields.length > 0) {
-      setError({ ...error, emptyField: true });
-      return;
-    }
-
+    //Check if any input fields are empty, only for create
     if (props.action === "create") {
+      let emptyFields = [];
+      props.headers.forEach((headerObj) => {
+        let headerText = Object.keys(headerObj)[0];
+        if (headerText === "paid" && formData[headerText] === undefined) {
+          formData[headerText] = false;
+        }
+        if (formData[headerText] === undefined) {
+          emptyFields.push(headerText);
+        }
+      });
+
+      if (emptyFields.length > 0) {
+        setError({ ...error, emptyField: true });
+        return;
+      }
       axios
         .post(baseURL + "/api/employee/create?table=" + props.table, formData)
         .then((res) => {
