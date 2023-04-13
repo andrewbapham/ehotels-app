@@ -63,8 +63,8 @@ CREATE TABLE booking (
     end_date DATE NOT NULL,
     price DECIMAL(10,2),
     room_id INT,
-    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
-    FOREIGN KEY (room_id) REFERENCES room(room_id)
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id) ON DELETE SET NULL,
+    FOREIGN KEY (room_id) REFERENCES room(room_id) ON DELETE SET NULL
 );
 
 CREATE TABLE renting (
