@@ -20,7 +20,7 @@ To stop the application, enter `CTRL+C` in the terminal window.
 #### IMPORTANT: In order for the backend to work as is, without changing user and password configurations, you will need to create a MySQL user that has access to the database with credentials:
 User: ehotels_access
 Password: csi2132
-Open MySQL workbench and execute the `schema.sql` script first, followed by the `dataForHotels.sql` script.
+Open MySQL workbench and execute the `unified_script.sql` script.
 
 ### Backend
 
