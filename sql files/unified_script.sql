@@ -1,3 +1,164 @@
+CREATE DATABASE ehotels_db;
+USE ehotels_db;
+CREATE TABLE hotel_chain (
+    chain_id INT PRIMARY KEY AUTO_INCREMENT,
+    central_office_address VARCHAR(255) NOT NULL,
+    central_office_city VARCHAR(255) NOT NULL,
+    number_of_hotels INT NOT NULL,
+    email_addresses VARCHAR(255),
+    phone_numbers VARCHAR(255),
+    chain_name VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE hotel (
+    hotel_id INT PRIMARY KEY AUTO_INCREMENT,
+    stars INT NOT NULL CHECK (Stars > 0 AND Stars <= 5),
+    number_of_rooms INT NOT NULL CHECK (number_of_rooms >= 0),
+    address VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    phone_numbers VARCHAR(255),
+    hotel_name VARCHAR(255) NOT NULL,
+    manager_id INT,
+    chain_id INT,
+    FOREIGN KEY (chain_id) REFERENCES hotel_chain(chain_id) ON DELETE CASCADE
+);
+
+CREATE TABLE room (
+    room_id INT PRIMARY KEY AUTO_INCREMENT,
+    price DECIMAL(10,2) NOT NULL CHECK (price > 0),
+    amenities VARCHAR(255),
+    capacity INT NOT NULL CHECK (Capacity > 0),
+    view VARCHAR(255),
+    extendable BOOLEAN,
+    problems VARCHAR(255),
+    hotel_id INT NOT NULL,
+    FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id) ON DELETE CASCADE
+);
+
+CREATE TABLE customer (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_name VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    ssn CHAR(11) UNIQUE NOT NULL,
+    registration_date DATE NOT NULL
+);
+
+CREATE TABLE employee (
+    employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    employee_name VARCHAR(255) NOT NULL,
+    address VARCHAR(255),
+    city VARCHAR(255),
+    ssn CHAR(11) UNIQUE NOT NULL,
+    employee_role VARCHAR(255),
+    hotel_id INT NOT NULL,
+    FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id) ON DELETE CASCADE
+);
+
+CREATE TABLE booking (
+    booking_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    price DECIMAL(10,2),
+    room_id INT,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+    FOREIGN KEY (room_id) REFERENCES room(room_id)
+);
+
+CREATE TABLE renting (
+    renting_id INT PRIMARY KEY AUTO_INCREMENT,
+    booking_id INT NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    paid BOOLEAN,
+    FOREIGN KEY (booking_id) REFERENCES booking(booking_id)
+);
+
+-- Triggers
+DELIMITER //
+
+CREATE TRIGGER delete_booking 
+BEFORE DELETE ON booking
+FOR EACH ROW
+BEGIN
+	SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Error, cannot delete from table booking.';
+END //
+
+CREATE TRIGGER delete_renting
+BEFORE DELETE ON renting
+FOR EACH ROW
+BEGIN
+	SIGNAL SQLSTATE '45000'
+    SET MESSAGE_TEXT = 'Error, cannot delete from table renting.';
+END //
+
+-- Automatically makes a renting if the booking is made for the same day or earlier
+CREATE TRIGGER make_renting
+AFTER INSERT ON booking
+FOR EACH ROW
+BEGIN
+    IF DATE(NEW.start_date) <= DATE(NOW()) AND DATE(NEW.end_date) >= DATE(NOW()) THEN
+    BEGIN
+		INSERT INTO renting (booking_id, start_date, end_date, paid) VALUE (NEW.booking_id, NEW.start_date, NEW.end_date, 0);
+	END;
+    END IF;
+    
+END//
+
+
+-- Stops insertion if date range is an invalid value (end date before start date)
+CREATE TRIGGER bad_date_range_booking
+BEFORE INSERT ON booking
+FOR EACH ROW
+BEGIN
+	IF NOT DATE(NEW.start_date) <= DATE(NEW.end_date) THEN
+    BEGIN
+		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Error, end date is before start date.';
+	END;
+	END IF;
+END//
+
+-- Calculates the price of a booking on insertion
+CREATE TRIGGER calculate_booking_price
+BEFORE INSERT ON booking
+FOR EACH ROW
+BEGIN
+	SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT room.price FROM room WHERE room.room_id = NEW.room_id));
+END //
+
+CREATE TRIGGER calculate_booking_price_on_update
+BEFORE UPDATE ON booking
+FOR EACH ROW
+BEGIN
+	IF NEW.start_date <> OLD.start_date OR NEW.end_date <> OLD.end_date THEN
+		SET NEW.price = (DATEDIFF(NEW.end_date, NEW.start_date) * (SELECT room.price FROM booking INNER JOIN room ON room.room_id = booking.room_id WHERE room.room_id = NEW.room_id AND booking.booking_id = NEW.booking_id));
+	END IF;
+END //
+
+DELIMITER ;
+CREATE VIEW occupied_rooms AS
+SELECT r.room_id, b.start_date, b.end_date FROM room r, booking b WHERE r.room_id = b.room_id;
+
+CREATE VIEW room_capacity_by_hotel AS
+SELECT h.hotel_id, h.hotel_name, SUM(r.capacity) AS total_capacity
+FROM hotel h
+JOIN room r ON h.hotel_id = r.hotel_id
+LEFT JOIN booking b ON r.room_id = b.room_id AND (CURDATE() BETWEEN b.start_date AND b.end_date)
+WHERE b.booking_id IS NULL
+GROUP BY h.hotel_id, h.hotel_name;
+
+
+CREATE VIEW available_rooms_per_area AS
+SELECT h.city, COUNT(r.room_id) AS num_available_rooms
+FROM hotel h
+JOIN room r ON h.hotel_id = r.hotel_id
+LEFT JOIN booking b ON r.room_id = b.room_id AND (CURDATE() BETWEEN b.start_date AND b.end_date)
+WHERE b.booking_id IS NULL
+GROUP BY h.city;
+
 -- Hotel_chain data
 INSERT INTO hotel_chain (Chain_id, Central_office_address, Central_office_city, Number_of_hotels, Email_addresses, Phone_numbers, Chain_name)
 VALUES 

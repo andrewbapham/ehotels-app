@@ -7,7 +7,6 @@ function CustomerView(props) {
   return (
     <div>
       <h3>Customer</h3>
-
       <RoomSearch />
       <CreateCustomer />
       <UpdateUserInfo />
