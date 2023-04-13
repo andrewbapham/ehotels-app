@@ -1,70 +1,70 @@
--- hotel_chain data
+-- Hotel_chain data
 INSERT INTO hotel_chain (Chain_id, Central_office_address, Central_office_city, Number_of_hotels, Email_addresses, Phone_numbers, Chain_name)
 VALUES 
-    (1, '123 Main St', 'New York', 10, 'info@hotelchain.com', '555-1234', 'Hotel Chain Inc.'),
-    (2, '456 Market St', 'San Francisco', 15, 'reservations@hotels-r-us.com', '555-5678', 'Hotels-R-Us'),
-    (3, '789 Broad St', 'Chicago', 12, 'info@midwesthotels.com', '101-555-9101', 'Midwest Hotels'),
+    (1, '123 Main St', 'New York', 8, 'info@hotelchain.com', '555-1234', 'Hotel Chain Inc.'),
+    (2, '456 Market St', 'San Francisco', 8, 'reservations@hotels-r-us.com', '555-5678', 'Hotels-R-Us'),
+    (3, '789 Broad St', 'Chicago', 8, 'info@midwesthotels.com', '101-555-9101', 'Midwest Hotels'),
     (4, '321 Park Ave', 'Miami', 8, 'reservations@sunrisehotels.com', '555-1212', 'Sunrise Hotels'),
-    (5, '555 Fifth Ave', 'Los Angeles', 20, 'info@luxuryhotels.com', '555-2323', 'Luxury Hotels');
+    (5, '555 Fifth Ave', 'Los Angeles', 8, 'info@luxuryhotels.com', '555-2323', 'Luxury Hotels');
 
--- Hotels for Gotel Chain 1
+-- Hotels for Hotel Chain 1
 INSERT INTO hotel(Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES (1, 4, 5, '123 Main St', 'Seattle', 'hotel1@hotelchain.com', '111-555-1234', 'Seattle Hotel', 1, 1),
-       (2, 3, 6, '456 First Ave', 'Miami', 'hotel2@hotelchain.com', '256-555-5678', 'Portland Inn', 2, 1),
-       (3, 2, 7, '789 Second St', 'San Francisco', 'hotel3@hotelchain.com', '103-555-9012', 'San Fran Suites', 3, 1),
+       (2, 3, 5, '456 First Ave', 'Miami', 'hotel2@hotelchain.com', '256-555-5678', 'Portland Inn', 2, 1),
+       (3, 2, 5, '789 Second St', 'San Francisco', 'hotel3@hotelchain.com', '103-555-9012', 'San Fran Suites', 3, 1),
        (4, 4, 5, '555 Third St', 'Los Angeles', 'hotel4@hotelchain.com', '102-555-3456', 'LA Lodge', 4, 1),
-       (5, 3, 6, '777 Fourth Ave', 'Chicago', 'hotel5@hotelchain.com', '101-555-7890', 'Chicago Plaza', 5, 1),
-       (6, 2, 7, '888 Fifth St', 'New York', 'hotel6@hotelchain.com', '100-555-2345', 'NYC Suites', 6, 1),
+       (5, 3, 5, '777 Fourth Ave', 'Chicago', 'hotel5@hotelchain.com', '101-555-7890', 'Chicago Plaza', 5, 1),
+       (6, 2, 5, '888 Fifth St', 'New York', 'hotel6@hotelchain.com', '100-555-2345', 'NYC Suites', 6, 1),
        (7, 4, 5, '999 Sixth Ave', 'Houston', 'hotel7@hotelchain.com', '234-555-6789', 'Houston Inn', 7, 1),
-       (8, 5, 6, '111 Seventh St', 'Miami', 'hotel8@hotelchain.com', '123-555-0123', 'Miami Suites', 8, 1);
+       (8, 5, 5, '111 Seventh St', 'Miami', 'hotel8@hotelchain.com', '123-555-0123', 'Miami Suites', 8, 1);
 
 -- Hotels for Hotel Chain 2
 INSERT INTO hotel(Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES 
-(9, 4, 6, '1234 Main St', 'Seattle', 'hotel9@hotels-r-us.com', '(555) 555-0009', 'Magnolia Hotel', 9, 2),
-(10, 3, 7, '5678 Elm St', 'Portland', 'hotel10@hotels-r-us.com', '(555) 555-0010', 'Pine Hotel', 10, 2),
-(11, 5, 6, '9101 Maple St', 'San Francisco', 'hotel11@hotels-r-us.com', '(555) 555-0011', 'Redwood Hotel', 11, 2),
+(9, 4, 5, '1234 Main St', 'Seattle', 'hotel9@hotels-r-us.com', '(555) 555-0009', 'Magnolia Hotel', 9, 2),
+(10, 3, 5, '5678 Elm St', 'Portland', 'hotel10@hotels-r-us.com', '(555) 555-0010', 'Pine Hotel', 10, 2),
+(11, 5, 5, '9101 Maple St', 'San Francisco', 'hotel11@hotels-r-us.com', '(555) 555-0011', 'Redwood Hotel', 11, 2),
 (12, 4, 5, '1213 Oak St', 'Los Angeles', 'hotel12@hotels-r-us.com', '(555) 555-0012', 'Willow Hotel', 12, 2),
 (13, 3, 5, '1415 Cedar St', 'San Diego', 'hotel13@hotels-r-us.com', '(555) 555-0013', 'Sequoia Hotel', 13, 2),
-(14, 5, 6, '1617 Pine St', 'Los Angeles', 'hotel14@hotels-r-us.com', '(555) 555-0014', 'Sunrise Hotel', 14, 2),
-(15, 4, 7, '1819 Birch St', 'Phoenix', 'hotel15@hotels-r-us.com', '(555) 555-0015', 'Canyon Hotel', 15, 2),
+(14, 5, 5, '1617 Pine St', 'Los Angeles', 'hotel14@hotels-r-us.com', '(555) 555-0014', 'Sunrise Hotel', 14, 2),
+(15, 4, 5, '1819 Birch St', 'Phoenix', 'hotel15@hotels-r-us.com', '(555) 555-0015', 'Canyon Hotel', 15, 2),
 (16, 3, 5, '2021 Spruce St', 'Dallas', 'hotel16@hotels-r-us.com', '(555) 555-0016', 'Elm Hotel', 16, 2);
 
 -- Hotels for Hotel Chain 3
 INSERT INTO hotel(Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES
-    (17, 5, 7, '123 Main St', 'Chicago', 'hotel17@midwesthotels.com', '123-456-7890', 'Midwest Plaza', 17, 3),
-    (18, 5, 7, '456 Elm St', 'Chicago', 'hotel18@midwesthotels.com', '123-456-7890', 'Midwest Suites', 18, 3),
-    (19, 5, 6, '789 Oak St', 'Chicago', 'hotel19@midwesthotels.com', '123-456-7890', 'Midwest Grand', 19, 3),
+    (17, 5, 5, '123 Main St', 'Chicago', 'hotel17@midwesthotels.com', '123-456-7890', 'Midwest Plaza', 17, 3),
+    (18, 5, 5, '456 Elm St', 'Chicago', 'hotel18@midwesthotels.com', '123-456-7890', 'Midwest Suites', 18, 3),
+    (19, 5, 5, '789 Oak St', 'Chicago', 'hotel19@midwesthotels.com', '123-456-7890', 'Midwest Grand', 19, 3),
     (20, 4, 5, '321 Maple Ave', 'Milwaukee', 'hotel20@midwesthotels.com', '123-456-7890', 'Midwest Inn', 20, 3),
-    (21, 2, 6, '654 Birch Rd', 'Milwaukee', 'hotel21@midwesthotels.com', '123-456-7890', 'Midwest Lodge', 21, 3),
+    (21, 2, 5, '654 Birch Rd', 'Milwaukee', 'hotel21@midwesthotels.com', '123-456-7890', 'Midwest Lodge', 21, 3),
     (22, 1, 5, '987 Walnut Blvd', 'Madison', 'hotel22@midwesthotels.com', '123-456-7890', 'Midwest House', 22, 3),
-    (23, 5, 7, '147 Cherry St', 'Madison', 'hotel23@midwesthotels.com', '123-456-7890', 'Midwest View', 23, 3),
-    (24, 3, 7, '258 Pine Rd', 'Madison', 'hotel24@midwesthotels.com', '123-456-7890', 'Midwest Garden', 24, 3);
+    (23, 5, 5, '147 Cherry St', 'Madison', 'hotel23@midwesthotels.com', '123-456-7890', 'Midwest View', 23, 3),
+    (24, 3, 5, '258 Pine Rd', 'Madison', 'hotel24@midwesthotels.com', '123-456-7890', 'Midwest Garden', 24, 3);
 
 -- Hotels for Hotel Chain 4
 INSERT INTO hotel(Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES 
-    (25, 4, 7, '123 Main St', 'Los Angeles', 'hotel25@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Los Angeles', 25, 4),
+    (25, 4, 5, '123 Main St', 'Los Angeles', 'hotel25@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Los Angeles', 25, 4),
     (26, 5, 5, '456 Elm St', 'San Francisco', 'hotel26@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel San Francisco', 26, 4),
-    (27, 3, 6, '789 Oak St', 'Seattle', 'hotel27@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Seattle', 27, 4),
+    (27, 3, 5, '789 Oak St', 'Seattle', 'hotel27@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Seattle', 27, 4),
     (28, 4, 5, '12 Pine St', 'Miami', 'hotel28@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Miami', 28, 4),
-    (29, 5, 6, '34 Maple St', 'New York', 'hotel29@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel New York', 29, 4),
+    (29, 5, 5, '34 Maple St', 'New York', 'hotel29@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel New York', 29, 4),
     (30, 3, 5, '56 Cedar St', 'Chicago', 'hotel30@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Chicago', 30, 4),
-    (31, 4, 7, '78 Pineapple St', 'Austin', 'hotel31@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Austin', 31, 4),
-    (32, 2, 6, '90 Peach St', 'Chicago', 'hotel32@sunrisehotels.com', '123-456-7890', 'Sunrise Inn Chicago', 32, 4);
+    (31, 4, 5, '78 Pineapple St', 'Austin', 'hotel31@sunrisehotels.com', '123-456-7890', 'Sunrise Hotel Austin', 31, 4),
+    (32, 2, 5, '90 Peach St', 'Chicago', 'hotel32@sunrisehotels.com', '123-456-7890', 'Sunrise Inn Chicago', 32, 4);
 
 -- Hotels for Hotel Chain 5
 INSERT INTO hotel(Hotel_id, Stars, Number_of_rooms, Address, City, Email, Phone_numbers, Hotel_name, Manager_id, Chain_id)
 VALUES
     (33, 4, 5, '1234 Main St', 'Los Angeles', 'hotel33@luxuryhotels.com', '123-456-7890', 'Luxury Inn', 33, 5),
-    (34, 3, 6, '5678 Elm St', 'New York', 'hotel34@luxuryhotels.com', '123-456-7890', 'Luxury Suites', 34, 5),
-    (35, 5, 7, '9101 Oak St', 'Chicago', 'hotel35@luxuryhotels.com', '123-456-7890', 'Luxury Lodge', 35, 5),
+    (34, 3, 5, '5678 Elm St', 'New York', 'hotel34@luxuryhotels.com', '123-456-7890', 'Luxury Suites', 34, 5),
+    (35, 5, 5, '9101 Oak St', 'Chicago', 'hotel35@luxuryhotels.com', '123-456-7890', 'Luxury Lodge', 35, 5),
     (36, 5, 5, '1212 Maple St', 'New York', 'hotel36@luxuryhotels.com', '123-456-7890', 'Luxury Tower', 36, 5),
-    (37, 5, 6, '1313 Oak St', 'Miami', 'hotel37@luxuryhotels.com', '123-456-7890', 'Luxury Mansion', 37, 5),
-    (38, 3, 7, '1414 Pine St', 'San Francisco', 'hotel38@luxuryhotels.com', '123-456-7890', 'Luxury Inn and Suites', 38, 5),
+    (37, 5, 5, '1313 Oak St', 'Miami', 'hotel37@luxuryhotels.com', '123-456-7890', 'Luxury Mansion', 37, 5),
+    (38, 3, 5, '1414 Pine St', 'San Francisco', 'hotel38@luxuryhotels.com', '123-456-7890', 'Luxury Inn and Suites', 38, 5),
     (39, 4, 5, '1515 Cedar St', 'Seattle', 'hotel39@luxuryhotels.com', '123-456-7890', 'Luxury Place', 39, 5),
-    (40, 5, 7, '1616 Walnut St', 'Dallas', 'hotel40@luxuryhotels.com', '123-456-7890', 'Luxury Resort', 40, 5);
+    (40, 5, 5, '1616 Walnut St', 'Dallas', 'hotel40@luxuryhotels.com', '123-456-7890', 'Luxury Resort', 40, 5);
 
 -- Room insertion data
 
@@ -602,15 +602,9 @@ VALUES
 CREATE INDEX ix_hotel_city
 ON hotel(city);
 
-<<<<<<< HEAD
 -- Customers will often filter rooms most often by price
 CREATE INDEX ix_room_price
-ON Room(Price);
-=======
--- Customers will often filter rooms most often by city and price
-CREATE INDEX ix_room_price_city
-ON room(city, price);
->>>>>>> 242f76a (Fixed capital letter inconsistencies)
+ON room(price);
 
 -- Customers will also filter by city and quality
 CREATE INDEX ix_hotel_stars

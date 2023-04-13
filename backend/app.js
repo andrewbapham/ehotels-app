@@ -70,7 +70,6 @@ app.get("/api/employee/headers", (req, res) => {
         }
         headers.push(obj);
       });
-      console.log(headers);
       res.send(headers);
     }
   });
@@ -141,8 +140,6 @@ app.get("/api/customer/findroom", (req, res) => {
     roomQuery +
     ") availRooms, hotel, hotel_chain WHERE availRooms.hotel_id = hotel.hotel_id AND hotel.chain_id = hotel_chain.chain_id";
 
-  console.log(chainInfoQuery);
-
   db.query(chainInfoQuery, (err, result) => {
     if (err) {
       console.log(err);
@@ -181,10 +178,8 @@ function generateClause(param, value) {
   } else if (param === "numRoomsInHotel") {
     if (!value.startDate || !value.endDate || !value.numRooms) {
       // If any parmeters are undefined, skip this clause
-      console.log("missing parameter for numRoomsInHotel");
       return "TRUE";
     }
-    console.log("building numRooms clause");
     clause =
       " room.hotel_id IN (SELECT counts.hotel_id FROM (SELECT room.hotel_id, count(*) FROM room, hotel h WHERE  room.room_id NOT IN (SELECT r.room_id FROM occupied_rooms r WHERE r.start_date <= '" +
       value.endDate +
@@ -201,7 +196,6 @@ function generateClause(param, value) {
     });
     //Remove the last " AND Room.amenities LIKE '%"
     clause = clause.slice(0, -27);
-    console.log(clause);
   } else if (value === "any") {
     //Placeholder to replace with a valid SQL clause if any value is acceptable
     clause = "TRUE";
@@ -215,7 +209,6 @@ app.post("/api/customer/book", (req, res) => {
   let values = [];
 
   values.push(Object.values(req.body));
-  console.log(values);
   db.query(sql, [values], (err, result) => {
     if (err) {
       console.log(err);
@@ -223,8 +216,6 @@ app.post("/api/customer/book", (req, res) => {
         .status(400)
         .send("Error inserting row into table - " + err.sqlMessage);
     } else {
-      console.log(result);
-
       res.send(result);
     }
   });
@@ -246,7 +237,6 @@ app.post("/api/customer/update", (req, res) => {
         .status(400)
         .send("Error inserting row into table - " + err.sqlMessage);
     } else {
-      console.log(result);
       res.send(result);
     }
   });
@@ -271,7 +261,6 @@ app.post("/api/customer/create", (req, res) => {
         .status(400)
         .send("Error inserting row into table - " + err.sqlMessage);
     } else {
-      console.log(result);
       res.send(result);
     }
   });
@@ -371,10 +360,11 @@ app.put("/api/employee/update", (req, res) => {
 
 app.delete("/api/employee/delete", (req, res) => {
   //Unique case, hotel_chain's id is named chain_id
+  let sql = "";
   if (req.query.table === "hotel_chain") {
     sql = "DELETE FROM hotel_chain WHERE chain_id = " + req.query.id;
   } else {
-    let sql =
+    sql =
       "DELETE FROM " +
       req.query.table +
       " WHERE " +

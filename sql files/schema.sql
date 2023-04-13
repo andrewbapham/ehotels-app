@@ -41,7 +41,7 @@ CREATE TABLE customer (
     customer_name VARCHAR(255) NOT NULL,
     address VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
-    ssn VARCHAR(255) UNIQUE NOT NULL,
+    ssn CHAR(11) UNIQUE NOT NULL,
     registration_date DATE NOT NULL
 );
 
@@ -50,7 +50,7 @@ CREATE TABLE employee (
     employee_name VARCHAR(255) NOT NULL,
     address VARCHAR(255),
     city VARCHAR(255),
-    ssn VARCHAR(255) UNIQUE NOT NULL,
+    ssn CHAR(11) UNIQUE NOT NULL,
     employee_role VARCHAR(255),
     hotel_id INT NOT NULL,
     FOREIGN KEY (hotel_id) REFERENCES hotel(hotel_id) ON DELETE CASCADE
