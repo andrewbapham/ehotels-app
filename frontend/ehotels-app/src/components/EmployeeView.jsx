@@ -9,12 +9,6 @@ function EmployeeView(props) {
   return (
     <div>
       <h3>Change role:</h3>
-      <Link to={"/customer"}>
-        <button>Customer</button>
-      </Link>
-      <Link to={"/employee"}>
-        <button>Employee</button>
-      </Link>
       <h3>Employee</h3>
       <div className="display-data-section">
         <h4>View Data</h4>

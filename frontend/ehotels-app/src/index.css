@@ -67,3 +67,17 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.navbar {
+  display: flex;
+}
+
+.nav-element {
+  display: block;
+  padding: 8px;
+}
+
+.nav-link {
+  margin: 0 8px;
+  color: white;
+}
