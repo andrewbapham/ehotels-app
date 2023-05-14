@@ -8,7 +8,6 @@ function EmployeeView(props) {
   const [action, setAction] = useState("create");
   return (
     <div>
-      <h3>Change role:</h3>
       <h3>Employee</h3>
       <div className="display-data-section">
         <h4>View Data</h4>
