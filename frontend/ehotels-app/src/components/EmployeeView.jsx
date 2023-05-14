@@ -2,11 +2,19 @@ import { React, useState } from "react";
 import DisplayData from "./employee_view/DisplayData";
 import CreateData from "./employee_view/CreateData";
 import DeleteData from "./employee_view/DeleteData";
+import { Link } from "react-router-dom";
 
 function EmployeeView(props) {
   const [action, setAction] = useState("create");
   return (
     <div>
+      <h3>Change role:</h3>
+      <Link to={"/customer"}>
+        <button>Customer</button>
+      </Link>
+      <Link to={"/employee"}>
+        <button>Employee</button>
+      </Link>
       <h3>Employee</h3>
       <div className="display-data-section">
         <h4>View Data</h4>
