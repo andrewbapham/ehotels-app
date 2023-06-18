@@ -15,12 +15,9 @@ function UpdateUserInfo(props) {
 
   useEffect(() => {
     setError("");
+    if (!formData.customer_id) return;
     axios
-      .get(
-        "/api/customer/customer_info?customer_id=" +
-          //If customer_id is undefined, set it to an empty string, backend will skip query
-          (formData.customer_id || "")
-      )
+      .get("/api/customer/customer_info?customer_id=" + formData.customer_id)
       .then((res) => {
         console.log(res);
         if (res.data[0]) setFormData(res.data[0]);
@@ -36,6 +33,8 @@ function UpdateUserInfo(props) {
     //Reset Success/Error
     setSuccess(false);
     setError("");
+
+    if (!formData.customer_id) return;
 
     axios
       .post("/api/customer/update", formData)

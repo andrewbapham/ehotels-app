@@ -38,8 +38,8 @@ router.get("/findroom", (req, res) => {
       if (key === "numRoomsInHotel") {
         //Pass all value needed to generate clause for numRoomsInHotel
         let valueObject = {
-          startDate: req.query.dateRange.startDate,
-          endDate: req.query.dateRange.endDate,
+          startDate: req.query.dateRange?.startDate,
+          endDate: req.query.dateRange?.endDate,
           numRooms: req.query.numRoomsInHotel,
         };
 
